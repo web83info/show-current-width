@@ -35,6 +35,7 @@ class W83ShowCurrentWidth_Core {
 		EOT;
 	const OPTION_DEFAULT_BREAKPOINTS_SHOW       = 1;
 	const OPTION_DEFAULT_ADMIN_SHOW             = 0;
+	const OPTION_DEFAULT_OTHER_INIT             = 0;
 
 	/**
 	 * Default values for table 'options'.
@@ -46,6 +47,7 @@ class W83ShowCurrentWidth_Core {
 		'breakpoints_definition' => self::OPTION_DEFAULT_BREAKPOINTS_DEFINITION,
 		'breakpoints_show'       => self::OPTION_DEFAULT_BREAKPOINTS_SHOW,
 		'admin_show'             => self::OPTION_DEFAULT_ADMIN_SHOW,
+		'other_init'             => self::OPTION_DEFAULT_OTHER_INIT,
 	);
 
 	/**
@@ -54,6 +56,14 @@ class W83ShowCurrentWidth_Core {
 	 * @return void
 	 */
 	private function __construct() {
+		// Initialize if option 'w83-show-current-width_other_init' is checked.
+		if ( '1' === get_option( self::PLUGIN_PREFIX . '_other_init' ) ) {
+			foreach ( $this->settings as $option_key => $option_value ) {
+				delete_option( self::PLUGIN_PREFIX . '_' . $option_key );
+			}
+		}
+		update_option( self::PLUGIN_PREFIX . '_other_init', 0 );
+
 		// Load default value.
 		foreach ( $this->settings as $option_key => $option_value ) {
 			if ( false === get_option( self::PLUGIN_PREFIX . '_' . $option_key ) ) {
