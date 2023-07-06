@@ -141,6 +141,17 @@ class W83ShowCurrentWidth_Admin {
 				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_init',
 			),
 		);
+		// Add field 3-2 (Uninstall).
+		add_settings_field(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall',
+			__( 'Delete the settings when uninstall', 'w83-show-current-width' ),
+			array( $this, 'register_field_other_uninstall_html' ),
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section3',
+			array(
+				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall',
+			),
+		);
 	}
 
 	/**
@@ -258,6 +269,29 @@ class W83ShowCurrentWidth_Admin {
 	}
 
 	/**
+	 * Field 3-2 HTML.
+	 *
+	 * @return void
+	 */
+	public function register_field_other_uninstall_html() {
+		printf(
+			'<input type="hidden" name="%s_other_uninstall" value="0" />',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX )
+		);
+		printf(
+			'<input type="checkbox" name="%s_other_uninstall" id="%s_other_uninstall" value="1" %s />',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall' ), '1', false )
+		);
+		printf(
+			'<label for="%s_other_uninstall">%s</label>',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_html__( 'Delete all the settings when this plugin is uninstalled', 'w83-show-current-width' )
+		);
+	}
+
+	/**
 	 * Register settings.
 	 *
 	 * @return void
@@ -282,6 +316,11 @@ class W83ShowCurrentWidth_Admin {
 		register_setting(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_init',
+			'esc_attr',
+		);
+		register_setting(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall',
 			'esc_attr',
 		);
 	}
