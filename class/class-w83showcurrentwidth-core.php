@@ -36,6 +36,7 @@ class W83ShowCurrentWidth_Core {
 	const OPTION_DEFAULT_BREAKPOINTS_SHOW       = 1;
 	const OPTION_DEFAULT_ADMIN_SHOW             = 0;
 	const OPTION_DEFAULT_OTHER_INIT             = 0;
+	const OPTION_DEFAULT_OTHER_UNINSTALL        = 0;
 
 	/**
 	 * Default values for table 'options'.
@@ -48,6 +49,7 @@ class W83ShowCurrentWidth_Core {
 		'breakpoints_show'       => self::OPTION_DEFAULT_BREAKPOINTS_SHOW,
 		'admin_show'             => self::OPTION_DEFAULT_ADMIN_SHOW,
 		'other_init'             => self::OPTION_DEFAULT_OTHER_INIT,
+		'other_uninstall'        => self::OPTION_DEFAULT_OTHER_UNINSTALL,
 	);
 
 	/**
@@ -62,7 +64,6 @@ class W83ShowCurrentWidth_Core {
 				delete_option( self::PLUGIN_PREFIX . '_' . $option_key );
 			}
 		}
-		update_option( self::PLUGIN_PREFIX . '_other_init', 0 );
 
 		// Load default value.
 		foreach ( $this->settings as $option_key => $option_value ) {
