@@ -55,7 +55,7 @@
 	#wpadminbar {
 		.ab-top-menu {
 			// Parent
-			#wp-admin-bar-w83-show-current-width {
+			#wp-admin-bar-window-width {
 				position: static;
 				display: block;
 				> .ab-item {
@@ -94,7 +94,7 @@
 				}
 			}
 			// Child
-			// #wp-admin-bar-w83-show-current-width-breakpoint {
+			// #wp-admin-bar-window-width-breakpoint {
 			//     > .ab-item {
 			//         .label {}
 			//             .breakpoint-wrap {
