@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: w83-show-current-width\n"
-"POT-Creation-Date: 2023-07-05 15:43+0900\n"
-"PO-Revision-Date: 2023-07-05 15:45+0900\n"
+"POT-Creation-Date: 2023-07-06 18:18+0900\n"
+"PO-Revision-Date: 2023-07-06 18:18+0900\n"
 "Last-Translator: \n"
 "Language-Team: web83info\n"
 "Language: ja\n"
@@ -56,44 +56,42 @@ msgstr "アンインストール時に設定を削除"
 msgid "Setting about breakpoints"
 msgstr "ブレークポイントに関する設定"
 
-#: class/class-w83showcurrentwidth-admin.php:202
-msgid ""
-"<code>Min width, Max width, Breakpoint abbr, Breakpoint name</code> Comma-"
-"separated values, no space between two values."
-msgstr ""
-"<code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略称,ブレ"
-"イクポイント名</code>の順にカンマ区切りで表記。値の間にスペースは不要。"
-
 #: class/class-w83showcurrentwidth-admin.php:203
+msgid "Min width, Max width, Breakpoint abbr, Breakpoint name"
+msgstr ""
+"範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略称,ブレイクポイン"
+"ト名"
+
+#: class/class-w83showcurrentwidth-admin.php:205
 msgid "Each breakpoint is separated by a new line."
 msgstr "各ブレイクポイントは改行で区切る。"
 
-#: class/class-w83showcurrentwidth-admin.php:213
+#: class/class-w83showcurrentwidth-admin.php:215
 msgid "Setting about admin page"
 msgstr "管理画面に関する設定"
 
-#: class/class-w83showcurrentwidth-admin.php:235
+#: class/class-w83showcurrentwidth-admin.php:237
 msgid "Display screen width on admin page"
 msgstr "管理画面で画面幅を表示する"
 
-#: class/class-w83showcurrentwidth-admin.php:245
+#: class/class-w83showcurrentwidth-admin.php:247
 msgid "Other settings which are not included in the above"
 msgstr "上記に含まれないその他の設定"
 
-#: class/class-w83showcurrentwidth-admin.php:267
+#: class/class-w83showcurrentwidth-admin.php:269
 msgid "Initialize all the settings to default values"
 msgstr "すべての設定をデフォルト値に初期化する"
 
-#: class/class-w83showcurrentwidth-admin.php:290
+#: class/class-w83showcurrentwidth-admin.php:292
 msgid "Delete all the settings when this plugin is uninstalled"
 msgstr "アンインストール時にすべての設定を削除する"
 
 #~ msgid ""
-#~ "<p><code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略"
-#~ "称,ブレイクポイント名</code>の順にカンマ区切りで表記。"
+#~ "<p><code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略称,ブ"
+#~ "レイクポイント名</code>の順にカンマ区切りで表記。"
 #~ msgstr ""
-#~ "<p><code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略"
-#~ "称,ブレイクポイント名</code>の順にカンマ区切りで表記。"
+#~ "<p><code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略称,ブ"
+#~ "レイクポイント名</code>の順にカンマ区切りで表記。"
 
 #~ msgid "各ブレイクポイントは改行で区切る。</p>"
 #~ msgstr "各ブレイクポイントは改行で区切る。</p>"

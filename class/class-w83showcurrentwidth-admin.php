@@ -199,8 +199,12 @@ class W83ShowCurrentWidth_Admin {
 			esc_html( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition' ) )
 		);
 		echo '<p>';
-		echo __( '<code>Min width, Max width, Breakpoint abbr, Breakpoint name</code> Comma-separated values, no space between two values.', 'w83-show-current-width' );
-		echo __( 'Each breakpoint is separated by a new line.', 'w83-show-current-width' );
+		echo '<code>';
+		echo esc_html__( 'Min width, Max width, Breakpoint abbr, Breakpoint name', 'w83-show-current-width' );
+		echo '</code>';
+		echo '</p>';
+		echo '<p>';
+		echo esc_html__( 'Each breakpoint is separated by a new line.', 'w83-show-current-width' );
 		echo '</p>';
 	}
 
