@@ -25,7 +25,7 @@ class W83ShowCurrentWidth_Core {
 	const PLUGIN_VERSION = '1.0.1';
 	const PLUGIN_PREFIX  = 'w83-show-current-width';
 
-	const OPTION_DEFAULT_BREAKPOINTS_DEFINITION = <<< EOT
+	const OPTION_DEFAULT_BREAKPOINTS_DEFINITION     = <<< EOT
 		0,576,xs,X-Small
 		576,768,sm,Small
 		768,992,md,Medium
@@ -33,10 +33,12 @@ class W83ShowCurrentWidth_Core {
 		1200,1400,xl,Extra large
 		1400,9999,xll,Extra extra large
 		EOT;
-	const OPTION_DEFAULT_BREAKPOINTS_SHOW       = 1;
-	const OPTION_DEFAULT_ADMIN_SHOW             = 0;
-	const OPTION_DEFAULT_OTHER_INIT             = 0;
-	const OPTION_DEFAULT_OTHER_UNINSTALL        = 0;
+	const OPTION_DEFAULT_BREAKPOINTS_SHOW           = 1;
+	const OPTION_DEFAULT_BREAKPOINTS_LIMITMAX       = 0;
+	const OPTION_DEFAULT_BREAKPOINTS_LIMITMAX_WIDTH = 782;
+	const OPTION_DEFAULT_ADMIN_SHOW                 = 0;
+	const OPTION_DEFAULT_OTHER_INIT                 = 0;
+	const OPTION_DEFAULT_OTHER_UNINSTALL            = 0;
 
 	/**
 	 * Default values for table 'options'.
@@ -45,11 +47,13 @@ class W83ShowCurrentWidth_Core {
 	 * @var array
 	 */
 	private $settings = array(
-		'breakpoints_definition' => self::OPTION_DEFAULT_BREAKPOINTS_DEFINITION,
-		'breakpoints_show'       => self::OPTION_DEFAULT_BREAKPOINTS_SHOW,
-		'admin_show'             => self::OPTION_DEFAULT_ADMIN_SHOW,
-		'other_init'             => self::OPTION_DEFAULT_OTHER_INIT,
-		'other_uninstall'        => self::OPTION_DEFAULT_OTHER_UNINSTALL,
+		'breakpoints_definition'     => self::OPTION_DEFAULT_BREAKPOINTS_DEFINITION,
+		'breakpoints_show'           => self::OPTION_DEFAULT_BREAKPOINTS_SHOW,
+		'breakpoints_limitmax'       => self::OPTION_DEFAULT_BREAKPOINTS_LIMITMAX,
+		'breakpoints_limitmax_width' => self::OPTION_DEFAULT_BREAKPOINTS_LIMITMAX_WIDTH,
+		'admin_show'                 => self::OPTION_DEFAULT_ADMIN_SHOW,
+		'other_init'                 => self::OPTION_DEFAULT_OTHER_INIT,
+		'other_uninstall'            => self::OPTION_DEFAULT_OTHER_UNINSTALL,
 	);
 
 	/**
@@ -112,6 +116,31 @@ class W83ShowCurrentWidth_Core {
 			array(),
 			self::PLUGIN_VERSION
 		);
+
+		// Load CSS inline.
+		$limitmax_width = get_option( self::PLUGIN_PREFIX . '_breakpoints_limitmax_width' );
+		if ( '1' === get_option( self::PLUGIN_PREFIX . '_breakpoints_limitmax' ) ) {
+			wp_register_style(
+				self::PLUGIN_PREFIX . '-css-inline',
+				false,
+				array(),
+				self::PLUGIN_VERSION
+			);
+			wp_enqueue_style(
+				self::PLUGIN_PREFIX . '-css-inline',
+			);
+			$css = <<< EOT
+			@media ( max-width: {$limitmax_width}px ) {
+				#wp-admin-bar-w83-show-current-width {
+					display: none !important;
+				}
+			}
+			EOT;
+			wp_add_inline_style(
+				self::PLUGIN_PREFIX . '-css-inline',
+				$css
+			);
+		}
 
 		// JavaScript.
 		wp_enqueue_script(

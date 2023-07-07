@@ -104,6 +104,20 @@ class W83ShowCurrentWidth_Admin {
 			),
 		);
 
+		// Add field 1-3.
+		// a (Show icon in mobile screen).
+		// b (Max width to show width icon).
+		add_settings_field(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitmax',
+			__( 'Max limit to show screen width', 'w83-show-current-width' ),
+			array( $this, 'register_field_breakpoints_limitmax_html' ),
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
+			array(
+				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitmax',
+			),
+		);
+
 		// Add section 2.
 		add_settings_section(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
@@ -209,6 +223,35 @@ class W83ShowCurrentWidth_Admin {
 	}
 
 	/**
+	 * Field 1-3 HTML.
+	 *
+	 * @return void
+	 */
+	public function register_field_breakpoints_limitmax_html() {
+		printf(
+			'<input type="hidden" name="%s_breakpoints_limitmax" value="0" />',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX )
+		);
+		printf(
+			'<input type="checkbox" name="%s_breakpoints_limitmax" id="%s_breakpoints_limitmax" value="1" %s />',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitmax' ), '1', false )
+		);
+		printf(
+			'<label for="%s_breakpoints_limitmax">%s</label>',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_html__( 'Do not show current width when the it is less than ', 'w83-show-current-width' )
+		);
+		printf(
+			'<input type="text" name="%s_breakpoints_limitmax_width" id="%s_breakpoints_limitmax_width" class="small-text" value="%s" /> px',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitmax_width' ) )
+		);
+	}
+
+	/**
 	 * Section 2 HTML.
 	 *
 	 * @return void
@@ -310,6 +353,16 @@ class W83ShowCurrentWidth_Admin {
 		register_setting(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_show',
+			'esc_attr',
+		);
+		register_setting(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitmax',
+			'esc_attr',
+		);
+		register_setting(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitmax_width',
 			'esc_attr',
 		);
 		register_setting(
