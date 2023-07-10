@@ -143,10 +143,10 @@ class W83ShowCurrentWidth_Core {
 					array(
 						'id'     => self::PLUGIN_PREFIX,
 						'class'  => 'menupop',
-						'title'  => '<span class="ab-icon" aria-hidden="true"><span class="width">????</span></span>' .
+						'title'  => '<span class="ab-icon" aria-hidden="true"><span class="width">0</span></span>' .
 										'<span class="ab-label">' .
-											'<span class="width-wrap"><span class="width">????</span>px</span>' .
-											'<span class="breakpoint-wrap">(<span class="breakpoint">???</span>)</span>' .
+											'<span class="width-wrap"><span class="width">0</span>px</span>' .
+											'<span class="breakpoint-wrap">(<span class="breakpoint"></span>)</span>' .
 										'</span>',
 						'parent' => '',
 						'href'   => '#',
@@ -156,7 +156,7 @@ class W83ShowCurrentWidth_Core {
 					array(
 						'id'     => self::PLUGIN_PREFIX . '-breakpoint',
 						'title'  => '<span class="label">' . esc_html__( 'Breakpoint:', 'w83-show-current-width' ) . '</span>' .
-										'<span class="breakpoint-wrap"><span class="breakpoint">???</span></span>',
+										'<span class="breakpoint-wrap"><span class="breakpoint"></span></span>',
 						'parent' => self::PLUGIN_PREFIX,
 						'href'   => '#',
 					)
@@ -167,9 +167,9 @@ class W83ShowCurrentWidth_Core {
 					array(
 						'id'     => self::PLUGIN_PREFIX,
 						'class'  => 'menupop',
-						'title'  => '<span class="ab-icon" aria-hidden="true"><span class="width">????</span></span>' .
+						'title'  => '<span class="ab-icon" aria-hidden="true"><span class="width">0</span></span>' .
 										'<span class="ab-label">' .
-											'<span class="width-wrap"><span class="width">????</span>px</span>' .
+											'<span class="width-wrap"><span class="width">0</span>px</span>' .
 										'</span>',
 						'parent' => '',
 						'href'   => '#',
