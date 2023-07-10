@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: w83-show-current-width\n"
-"POT-Creation-Date: 2023-07-06 18:18+0900\n"
-"PO-Revision-Date: 2023-07-06 18:18+0900\n"
+"POT-Creation-Date: 2023-07-07 13:01+0900\n"
+"PO-Revision-Date: 2023-07-07 13:03+0900\n"
 "Last-Translator: \n"
 "Language-Team: web83info\n"
 "Language: ja\n"
@@ -24,7 +24,7 @@ msgid "Breakpoint settings"
 msgstr "ブレークポイントの設定"
 
 #: class/class-w83showcurrentwidth-admin.php:87
-#: class/class-w83showcurrentwidth-admin.php:185
+#: class/class-w83showcurrentwidth-admin.php:199
 msgid "Display breakpoint names"
 msgstr "ブレークポイント名の表示"
 
@@ -32,66 +32,76 @@ msgstr "ブレークポイント名の表示"
 msgid "Breakpoint definiiton"
 msgstr "ブレークポイントの定義"
 
-#: class/class-w83showcurrentwidth-admin.php:110
+#: class/class-w83showcurrentwidth-admin.php:112
+msgid "Max limit to show screen width"
+msgstr "画面幅を表示する上限値"
+
+#: class/class-w83showcurrentwidth-admin.php:124
 msgid "Admin page settings"
 msgstr "管理画面設定"
 
-#: class/class-w83showcurrentwidth-admin.php:117
+#: class/class-w83showcurrentwidth-admin.php:131
 msgid "Admin page display"
 msgstr "管理画面で表示"
 
-#: class/class-w83showcurrentwidth-admin.php:129
+#: class/class-w83showcurrentwidth-admin.php:143
 msgid "Other settings"
 msgstr "その他の設定"
 
-#: class/class-w83showcurrentwidth-admin.php:136
+#: class/class-w83showcurrentwidth-admin.php:150
 msgid "Initialize the settings"
 msgstr "設定の初期化"
 
-#: class/class-w83showcurrentwidth-admin.php:147
+#: class/class-w83showcurrentwidth-admin.php:161
 msgid "Delete the settings when uninstall"
 msgstr "アンインストール時に設定を削除"
 
-#: class/class-w83showcurrentwidth-admin.php:163
+#: class/class-w83showcurrentwidth-admin.php:177
 msgid "Setting about breakpoints"
 msgstr "ブレークポイントに関する設定"
 
-#: class/class-w83showcurrentwidth-admin.php:203
+#: class/class-w83showcurrentwidth-admin.php:217
 msgid "Min width, Max width, Breakpoint abbr, Breakpoint name"
 msgstr ""
-"範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略称,ブレイクポイン"
-"ト名"
+"範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略称,"
+"ブレイクポイント名"
 
-#: class/class-w83showcurrentwidth-admin.php:205
+#: class/class-w83showcurrentwidth-admin.php:221
 msgid "Each breakpoint is separated by a new line."
 msgstr "各ブレイクポイントは改行で区切る。"
 
-#: class/class-w83showcurrentwidth-admin.php:215
+#: class/class-w83showcurrentwidth-admin.php:244
+msgid "Do not show current width when the it is less than "
+msgstr "画面幅が次の幅以下の場合、画面幅を表示しない。 "
+
+#: class/class-w83showcurrentwidth-admin.php:260
 msgid "Setting about admin page"
 msgstr "管理画面に関する設定"
 
-#: class/class-w83showcurrentwidth-admin.php:237
+#: class/class-w83showcurrentwidth-admin.php:282
 msgid "Display screen width on admin page"
 msgstr "管理画面で画面幅を表示する"
 
-#: class/class-w83showcurrentwidth-admin.php:247
+#: class/class-w83showcurrentwidth-admin.php:292
 msgid "Other settings which are not included in the above"
 msgstr "上記に含まれないその他の設定"
 
-#: class/class-w83showcurrentwidth-admin.php:269
+#: class/class-w83showcurrentwidth-admin.php:314
 msgid "Initialize all the settings to default values"
 msgstr "すべての設定をデフォルト値に初期化する"
 
-#: class/class-w83showcurrentwidth-admin.php:292
+#: class/class-w83showcurrentwidth-admin.php:337
 msgid "Delete all the settings when this plugin is uninstalled"
 msgstr "アンインストール時にすべての設定を削除する"
 
 #~ msgid ""
-#~ "<p><code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略称,ブ"
-#~ "レイクポイント名</code>の順にカンマ区切りで表記。"
+#~ "<p><code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイク"
+#~ "ポイント略称,ブレイクポイント名</code>の順にカンマ区切りで表"
+#~ "記。"
 #~ msgstr ""
-#~ "<p><code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略称,ブ"
-#~ "レイクポイント名</code>の順にカンマ区切りで表記。"
+#~ "<p><code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイク"
+#~ "ポイント略称,ブレイクポイント名</code>の順にカンマ区切りで表"
+#~ "記。"
 
 #~ msgid "各ブレイクポイントは改行で区切る。</p>"
 #~ msgstr "各ブレイクポイントは改行で区切る。</p>"
