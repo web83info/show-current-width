@@ -106,15 +106,16 @@ class W83ShowCurrentWidth_Admin {
 
 		// Add field 1-3.
 		// a (Show icon in mobile screen).
-		// b (Max width to show width icon).
+		// b (Min width to show width icon).
+		// c (Max width to show width icon).
 		add_settings_field(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitmax',
-			__( 'Max limit to show screen width', 'w83-show-current-width' ),
-			array( $this, 'register_field_breakpoints_limitmax_html' ),
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
+			__( 'Width limit to show screen width', 'w83-show-current-width' ),
+			array( $this, 'register_field_breakpoints_limitwidth_html' ),
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
 			array(
-				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitmax',
+				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
 			),
 		);
 
@@ -227,27 +228,33 @@ class W83ShowCurrentWidth_Admin {
 	 *
 	 * @return void
 	 */
-	public function register_field_breakpoints_limitmax_html() {
+	public function register_field_breakpoints_limitwidth_html() {
 		printf(
-			'<input type="hidden" name="%s_breakpoints_limitmax" value="0" />',
+			'<input type="hidden" name="%s_breakpoints_limitwidth" value="0" />',
 			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX )
 		);
 		printf(
-			'<input type="checkbox" name="%s_breakpoints_limitmax" id="%s_breakpoints_limitmax" value="1" %s />',
+			'<input type="checkbox" name="%s_breakpoints_limitwidth" id="%s_breakpoints_limitwidth" value="1" %s />',
 			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
 			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitmax' ), '1', false )
+			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth' ), '1', false )
 		);
 		printf(
-			'<label for="%s_breakpoints_limitmax">%s</label>',
+			'<label for="%s_breakpoints_limitwidth">%s</label>',
 			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_html__( 'Do not show current width when the it is less than ', 'w83-show-current-width' )
+			esc_html__( 'Show current width when the it is in the following range. ', 'w83-show-current-width' )
 		);
 		printf(
-			'<input type="text" name="%s_breakpoints_limitmax_width" id="%s_breakpoints_limitmax_width" class="small-text" value="%s" /> px',
+			'<input type="text" name="%s_breakpoints_limitwidth_min" id="%s_breakpoints_limitwidth_min" class="small-text" value="%s" /> ~ ',
 			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
 			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitmax_width' ) )
+			esc_attr( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_min' ) )
+		);
+		printf(
+			'<input type="text" name="%s_breakpoints_limitwidth_max" id="%s_breakpoints_limitwidth_max" class="small-text" value="%s" /> px',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_max' ) )
 		);
 	}
 
@@ -357,12 +364,17 @@ class W83ShowCurrentWidth_Admin {
 		);
 		register_setting(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitmax',
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
 			'esc_attr',
 		);
 		register_setting(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitmax_width',
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_min',
+			'esc_attr',
+		);
+		register_setting(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_max',
 			'esc_attr',
 		);
 		register_setting(
