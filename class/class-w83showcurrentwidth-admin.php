@@ -103,7 +103,6 @@ class W83ShowCurrentWidth_Admin {
 				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition',
 			),
 		);
-
 		// Add field 1-3.
 		// a (Show icon in mobile screen).
 		// b (Min width to show width icon).
@@ -116,6 +115,17 @@ class W83ShowCurrentWidth_Admin {
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
 			array(
 				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
+			),
+		);
+		// Add field 1-4 (Animation on/off).
+		add_settings_field(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
+			__( 'Animation', 'w83-show-current-width' ),
+			array( $this, 'register_field_animation_show_html' ),
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
+			array(
+				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
 			),
 		);
 
@@ -259,6 +269,29 @@ class W83ShowCurrentWidth_Admin {
 	}
 
 	/**
+	 * Field 1-4 HTML.
+	 *
+	 * @return void
+	 */
+	public function register_field_animation_show_html() {
+		printf(
+			'<input type="hidden" name="%s_animation_show" value="0" />',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX )
+		);
+		printf(
+			'<input type="checkbox" name="%s_animation_show" id="%s_animation_show" value="1" %s />',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show' ), '1', false )
+		);
+		printf(
+			'<label for="%s_animation_show">%s</label>',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_html__( 'Enable count up animation', 'w83-show-current-width' )
+		);
+	}
+
+	/**
 	 * Section 2 HTML.
 	 *
 	 * @return void
@@ -375,6 +408,11 @@ class W83ShowCurrentWidth_Admin {
 		register_setting(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_max',
+			'esc_attr',
+		);
+		register_setting(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
 			'esc_attr',
 		);
 		register_setting(

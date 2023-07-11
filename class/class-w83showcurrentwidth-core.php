@@ -37,6 +37,7 @@ class W83ShowCurrentWidth_Core {
 	const OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH     = 0;
 	const OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MIN = 0;
 	const OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MAX = 9999;
+	const OPTION_DEFAULT_ANIMATION_SHOW             = 1;
 	const OPTION_DEFAULT_ADMIN_SHOW                 = 0;
 	const OPTION_DEFAULT_OTHER_INIT                 = 0;
 	const OPTION_DEFAULT_OTHER_UNINSTALL            = 0;
@@ -53,6 +54,7 @@ class W83ShowCurrentWidth_Core {
 		'breakpoints_limitwidth'     => self::OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH,
 		'breakpoints_limitwidth_min' => self::OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MIN,
 		'breakpoints_limitwidth_max' => self::OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MAX,
+		'animation_show'             => self::OPTION_DEFAULT_ANIMATION_SHOW,
 		'admin_show'                 => self::OPTION_DEFAULT_ADMIN_SHOW,
 		'other_init'                 => self::OPTION_DEFAULT_OTHER_INIT,
 		'other_uninstall'            => self::OPTION_DEFAULT_OTHER_UNINSTALL,
@@ -157,6 +159,7 @@ class W83ShowCurrentWidth_Core {
 		$pass_to_js = array(
 			'breakpoints_definition' => get_option( self::PLUGIN_PREFIX . '_breakpoints_definition' ),
 			'breakpoints_show'       => get_option( self::PLUGIN_PREFIX . '_breakpoints_show' ),
+			'animation_show'         => get_option( self::PLUGIN_PREFIX . '_animation_show' ),
 		);
 		wp_localize_script( self::PLUGIN_PREFIX . '-js', 'W83ShowCurrentWidth', $pass_to_js );
 	}
