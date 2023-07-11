@@ -174,6 +174,16 @@ class W83ShowCurrentWidth_Core {
 		if ( ! is_admin() || get_option( self::PLUGIN_PREFIX . '_admin_show' ) ) {
 			if ( get_option( self::PLUGIN_PREFIX . '_breakpoints_show' ) ) {
 				// Display breakpoint.
+				$breakpoints_definition = str_replace(
+					array( "\r\n", "\r", "\n" ),
+					"\n",
+					get_option( self::PLUGIN_PREFIX . '_breakpoints_definition' )
+				);
+				$breakpoints            = explode( "\n", $breakpoints_definition );
+				foreach ( $breakpoints as $breakpoint_key => $breakpoint_value ) {
+					$breakpoints[ $breakpoint_key ] = explode( ',', $breakpoint_value );
+				}
+
 				$wp_admin_bar->add_node(
 					array(
 						'id'     => self::PLUGIN_PREFIX,
@@ -196,6 +206,25 @@ class W83ShowCurrentWidth_Core {
 						'href'   => '#',
 					)
 				);
+				$i = 1;
+				foreach ( $breakpoints as $breakpoint ) {
+					$wp_admin_bar->add_node(
+						array(
+							'id'     => self::PLUGIN_PREFIX . '-breakpoint-' . $i,
+							'title'  =>
+								sprintf(
+									'<span class="name">%s:</span><span class="range">%s &le; %s < %s</span>',
+									$breakpoint[3],
+									$breakpoint[0],
+									$breakpoint[2],
+									$breakpoint[1]
+								),
+							'parent' => self::PLUGIN_PREFIX,
+							'href'   => '#',
+						)
+					);
+					$i++;
+				}
 			} else {
 				// No display breakpoint.
 				$wp_admin_bar->add_node(

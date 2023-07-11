@@ -10,9 +10,20 @@
 }
 #wpadminbar .ab-top-menu #wp-admin-bar-w83-show-current-width-breakpoint > .ab-item .label {
   margin-right: 0.25rem;
+  font-weight: bold;
 }
 #wpadminbar .ab-top-menu #wp-admin-bar-w83-show-current-width-breakpoint > .ab-item .breakpoint-wrap {
   margin-left: 0.25rem;
+  font-weight: bold;
+}
+#wpadminbar .ab-top-menu [id^=wp-admin-bar-w83-show-current-width-breakpoint-] .name {
+  margin-left: 1rem;
+  display: inline-block;
+  width: 9rem;
+}
+#wpadminbar .ab-top-menu [id^=wp-admin-bar-w83-show-current-width-breakpoint-] .range {
+  display: inline-block;
+  width: 9rem;
 }
 
 @media (max-width: 782px) {
