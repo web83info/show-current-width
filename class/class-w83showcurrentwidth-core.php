@@ -34,8 +34,9 @@ class W83ShowCurrentWidth_Core {
 		1400,9999,xll,Extra extra large
 		EOT;
 	const OPTION_DEFAULT_BREAKPOINTS_SHOW           = 1;
-	const OPTION_DEFAULT_BREAKPOINTS_LIMITMAX       = 0;
-	const OPTION_DEFAULT_BREAKPOINTS_LIMITMAX_WIDTH = 782;
+	const OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH     = 0;
+	const OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MIN = 0;
+	const OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MAX = 9999;
 	const OPTION_DEFAULT_ADMIN_SHOW                 = 0;
 	const OPTION_DEFAULT_OTHER_INIT                 = 0;
 	const OPTION_DEFAULT_OTHER_UNINSTALL            = 0;
@@ -49,8 +50,9 @@ class W83ShowCurrentWidth_Core {
 	private $settings = array(
 		'breakpoints_definition'     => self::OPTION_DEFAULT_BREAKPOINTS_DEFINITION,
 		'breakpoints_show'           => self::OPTION_DEFAULT_BREAKPOINTS_SHOW,
-		'breakpoints_limitmax'       => self::OPTION_DEFAULT_BREAKPOINTS_LIMITMAX,
-		'breakpoints_limitmax_width' => self::OPTION_DEFAULT_BREAKPOINTS_LIMITMAX_WIDTH,
+		'breakpoints_limitwidth'     => self::OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH,
+		'breakpoints_limitwidth_min' => self::OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MIN,
+		'breakpoints_limitwidth_max' => self::OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MAX,
 		'admin_show'                 => self::OPTION_DEFAULT_ADMIN_SHOW,
 		'other_init'                 => self::OPTION_DEFAULT_OTHER_INIT,
 		'other_uninstall'            => self::OPTION_DEFAULT_OTHER_UNINSTALL,
@@ -118,8 +120,9 @@ class W83ShowCurrentWidth_Core {
 		);
 
 		// Load CSS inline.
-		$limitmax_width = get_option( self::PLUGIN_PREFIX . '_breakpoints_limitmax_width' );
-		if ( '1' === get_option( self::PLUGIN_PREFIX . '_breakpoints_limitmax' ) ) {
+		$limitwidth_min = get_option( self::PLUGIN_PREFIX . '_breakpoints_limitwidth_min' );
+		$limitwidth_max = get_option( self::PLUGIN_PREFIX . '_breakpoints_limitwidth_max' );
+		if ( '1' === get_option( self::PLUGIN_PREFIX . '_breakpoints_limitwidth' ) ) {
 			wp_register_style(
 				self::PLUGIN_PREFIX . '-css-inline',
 				false,
@@ -130,7 +133,7 @@ class W83ShowCurrentWidth_Core {
 				self::PLUGIN_PREFIX . '-css-inline',
 			);
 			$css = <<< EOT
-			@media ( max-width: {$limitmax_width}px ) {
+			@media (max-width: {$limitwidth_min}px),  (min-width: {$limitwidth_max}px) {
 				#wp-admin-bar-w83-show-current-width {
 					display: none !important;
 				}
