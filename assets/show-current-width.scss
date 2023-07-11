@@ -24,7 +24,7 @@
 				}
 				// ◀▶ Icon width.
 				.ab-label {
-					// 'xxxxpx'
+					// '0px'
 					// .width-wrap {}
 					// 'Breakpoint'
 					.breakpoint-wrap {
@@ -39,17 +39,28 @@
 			> .ab-item {
 				.label {
 					margin-right: .25rem;
+					font-weight: bold;
 				}
 				.breakpoint-wrap {
 					margin-left: .25rem;
+					font-weight: bold;
 					// .breakpoint {}
 				}
 			}
 		}
+		[id ^= "wp-admin-bar-w83-show-current-width-breakpoint-"] {
+			.name {
+				margin-left: 1rem;
+				display: inline-block;
+				width: 9rem;
+			}
+			.range {
+				display: inline-block;
+				width: 9rem;
+			}
+		}
 	}
 }
-
-
 
 @include mobile {
 	#wpadminbar {
@@ -80,7 +91,7 @@
 					}
 					// ◀▶ Icon width
 					.ab-label {
-						// 'xxxxpx'
+						// '0px'
 						.width-wrap {
 							display: none;
 							// .width {}
@@ -101,6 +112,8 @@
 			//             .breakpoint {}
 			//         }
 			//     }
+			// }
+			// [id ^= "wp-admin-bar-w83-show-current-width-breakpoint-"] {
 			// }
 		}
 	}
