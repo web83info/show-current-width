@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: w83-show-current-width\n"
-"POT-Creation-Date: 2023-07-05 15:43+0900\n"
-"PO-Revision-Date: 2023-07-05 15:45+0900\n"
+"POT-Creation-Date: 2023-07-11 10:25+0900\n"
+"PO-Revision-Date: 2023-07-11 10:26+0900\n"
 "Last-Translator: \n"
 "Language-Team: web83info\n"
 "Language: ja\n"
@@ -24,7 +24,7 @@ msgid "Breakpoint settings"
 msgstr "ブレークポイントの設定"
 
 #: class/class-w83showcurrentwidth-admin.php:87
-#: class/class-w83showcurrentwidth-admin.php:185
+#: class/class-w83showcurrentwidth-admin.php:210
 msgid "Display breakpoint names"
 msgstr "ブレークポイント名の表示"
 
@@ -32,68 +32,84 @@ msgstr "ブレークポイント名の表示"
 msgid "Breakpoint definiiton"
 msgstr "ブレークポイントの定義"
 
-#: class/class-w83showcurrentwidth-admin.php:110
+#: class/class-w83showcurrentwidth-admin.php:112
+msgid "Width limit to show screen width"
+msgstr "画面幅を表示する範囲"
+
+#: class/class-w83showcurrentwidth-admin.php:123
+msgid "Animation"
+msgstr "アニメーション"
+
+#: class/class-w83showcurrentwidth-admin.php:135
 msgid "Admin page settings"
 msgstr "管理画面設定"
 
-#: class/class-w83showcurrentwidth-admin.php:117
+#: class/class-w83showcurrentwidth-admin.php:142
 msgid "Admin page display"
 msgstr "管理画面で表示"
 
-#: class/class-w83showcurrentwidth-admin.php:129
+#: class/class-w83showcurrentwidth-admin.php:154
 msgid "Other settings"
 msgstr "その他の設定"
 
-#: class/class-w83showcurrentwidth-admin.php:136
+#: class/class-w83showcurrentwidth-admin.php:161
 msgid "Initialize the settings"
 msgstr "設定の初期化"
 
-#: class/class-w83showcurrentwidth-admin.php:147
+#: class/class-w83showcurrentwidth-admin.php:172
 msgid "Delete the settings when uninstall"
 msgstr "アンインストール時に設定を削除"
 
-#: class/class-w83showcurrentwidth-admin.php:163
+#: class/class-w83showcurrentwidth-admin.php:188
 msgid "Setting about breakpoints"
 msgstr "ブレークポイントに関する設定"
 
-#: class/class-w83showcurrentwidth-admin.php:202
-msgid ""
-"<code>Min width, Max width, Breakpoint abbr, Breakpoint name</code> Comma-"
-"separated values, no space between two values."
+#: class/class-w83showcurrentwidth-admin.php:228
+msgid "Min width, Max width, Breakpoint abbr, Breakpoint name"
 msgstr ""
-"<code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略称,ブレ"
-"イクポイント名</code>の順にカンマ区切りで表記。値の間にスペースは不要。"
+"範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略称,"
+"ブレイクポイント名"
 
-#: class/class-w83showcurrentwidth-admin.php:203
+#: class/class-w83showcurrentwidth-admin.php:232
 msgid "Each breakpoint is separated by a new line."
 msgstr "各ブレイクポイントは改行で区切る。"
 
-#: class/class-w83showcurrentwidth-admin.php:213
+#: class/class-w83showcurrentwidth-admin.php:255
+msgid "Show current width when the it is in the following range. "
+msgstr "画面幅が次の範囲の場合だけ、画面幅を表示する。 "
+
+#: class/class-w83showcurrentwidth-admin.php:290
+msgid "Enable count up animation"
+msgstr "カウントアップアニメーションを有効にする"
+
+#: class/class-w83showcurrentwidth-admin.php:300
 msgid "Setting about admin page"
 msgstr "管理画面に関する設定"
 
-#: class/class-w83showcurrentwidth-admin.php:235
+#: class/class-w83showcurrentwidth-admin.php:322
 msgid "Display screen width on admin page"
 msgstr "管理画面で画面幅を表示する"
 
-#: class/class-w83showcurrentwidth-admin.php:245
+#: class/class-w83showcurrentwidth-admin.php:332
 msgid "Other settings which are not included in the above"
 msgstr "上記に含まれないその他の設定"
 
-#: class/class-w83showcurrentwidth-admin.php:267
+#: class/class-w83showcurrentwidth-admin.php:354
 msgid "Initialize all the settings to default values"
 msgstr "すべての設定をデフォルト値に初期化する"
 
-#: class/class-w83showcurrentwidth-admin.php:290
+#: class/class-w83showcurrentwidth-admin.php:377
 msgid "Delete all the settings when this plugin is uninstalled"
 msgstr "アンインストール時にすべての設定を削除する"
 
 #~ msgid ""
-#~ "<p><code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略"
-#~ "称,ブレイクポイント名</code>の順にカンマ区切りで表記。"
+#~ "<p><code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポ"
+#~ "イント略称,ブレイクポイント名</code>の順にカンマ区切りで表"
+#~ "記。"
 #~ msgstr ""
-#~ "<p><code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポイント略"
-#~ "称,ブレイクポイント名</code>の順にカンマ区切りで表記。"
+#~ "<p><code>範囲の最小値（以上）,範囲の最大値（未満）,ブレイクポ"
+#~ "イント略称,ブレイクポイント名</code>の順にカンマ区切りで表"
+#~ "記。"
 
 #~ msgid "各ブレイクポイントは改行で区切る。</p>"
 #~ msgstr "各ブレイクポイントは改行で区切る。</p>"

@@ -103,6 +103,31 @@ class W83ShowCurrentWidth_Admin {
 				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition',
 			),
 		);
+		// Add field 1-3.
+		// a (Show icon in mobile screen).
+		// b (Min width to show width icon).
+		// c (Max width to show width icon).
+		add_settings_field(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
+			__( 'Width limit to show screen width', 'w83-show-current-width' ),
+			array( $this, 'register_field_breakpoints_limitwidth_html' ),
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
+			array(
+				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
+			),
+		);
+		// Add field 1-4 (Animation on/off).
+		add_settings_field(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
+			__( 'Animation', 'w83-show-current-width' ),
+			array( $this, 'register_field_animation_show_html' ),
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
+			array(
+				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
+			),
+		);
 
 		// Add section 2.
 		add_settings_section(
@@ -199,9 +224,71 @@ class W83ShowCurrentWidth_Admin {
 			esc_html( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition' ) )
 		);
 		echo '<p>';
-		echo __( '<code>Min width, Max width, Breakpoint abbr, Breakpoint name</code> Comma-separated values, no space between two values.', 'w83-show-current-width' );
-		echo __( 'Each breakpoint is separated by a new line.', 'w83-show-current-width' );
+		echo '<code>';
+		echo esc_html__( 'Min width, Max width, Breakpoint abbr, Breakpoint name', 'w83-show-current-width' );
+		echo '</code>';
 		echo '</p>';
+		echo '<p>';
+		echo esc_html__( 'Each breakpoint is separated by a new line.', 'w83-show-current-width' );
+		echo '</p>';
+	}
+
+	/**
+	 * Field 1-3 HTML.
+	 *
+	 * @return void
+	 */
+	public function register_field_breakpoints_limitwidth_html() {
+		printf(
+			'<input type="hidden" name="%s_breakpoints_limitwidth" value="0" />',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX )
+		);
+		printf(
+			'<input type="checkbox" name="%s_breakpoints_limitwidth" id="%s_breakpoints_limitwidth" value="1" %s />',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth' ), '1', false )
+		);
+		printf(
+			'<label for="%s_breakpoints_limitwidth">%s</label>',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_html__( 'Show current width when the it is in the following range. ', 'w83-show-current-width' )
+		);
+		printf(
+			'<input type="text" name="%s_breakpoints_limitwidth_min" id="%s_breakpoints_limitwidth_min" class="small-text" value="%s" /> ~ ',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_min' ) )
+		);
+		printf(
+			'<input type="text" name="%s_breakpoints_limitwidth_max" id="%s_breakpoints_limitwidth_max" class="small-text" value="%s" /> px',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_max' ) )
+		);
+	}
+
+	/**
+	 * Field 1-4 HTML.
+	 *
+	 * @return void
+	 */
+	public function register_field_animation_show_html() {
+		printf(
+			'<input type="hidden" name="%s_animation_show" value="0" />',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX )
+		);
+		printf(
+			'<input type="checkbox" name="%s_animation_show" id="%s_animation_show" value="1" %s />',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show' ), '1', false )
+		);
+		printf(
+			'<label for="%s_animation_show">%s</label>',
+			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_html__( 'Enable count up animation', 'w83-show-current-width' )
+		);
 	}
 
 	/**
@@ -306,6 +393,26 @@ class W83ShowCurrentWidth_Admin {
 		register_setting(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_show',
+			'esc_attr',
+		);
+		register_setting(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
+			'esc_attr',
+		);
+		register_setting(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_min',
+			'esc_attr',
+		);
+		register_setting(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_max',
+			'esc_attr',
+		);
+		register_setting(
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
 			'esc_attr',
 		);
 		register_setting(
