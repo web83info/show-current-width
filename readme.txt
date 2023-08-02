@@ -19,6 +19,9 @@ This plugin shows a current screen width on WP adminbar.
 
 == Changelog ==
 
+= 1.1.1 - 2023-08-02 =
+* Fix: When multisite, uninstall options on all sub sites.
+
 = 1.1.0 - 2023-07-12 =
 * Add: Count up animation.
 * Add: Limit min and max width to show screen size.
