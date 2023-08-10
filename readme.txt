@@ -2,9 +2,9 @@
 Contributors: web83info
 Tags: admin,width,developement
 Requires at least: 6.2
-Tested up to: 6.2
+Tested up to: 6.3
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,6 +18,9 @@ This plugin shows a current screen width on WP adminbar.
 * No FAQ for now.
 
 == Changelog ==
+
+= 1.1.2 - 2023-08-10 =
+* Add: LICENSE.
 
 = 1.1.1 - 2023-08-02 =
 * Fix: When multisite, uninstall options on all sub sites.
