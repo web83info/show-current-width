@@ -22,7 +22,7 @@ class W83ShowCurrentWidth_Core {
 	/**
 	 * Plugin constant.
 	 */
-	const PLUGIN_VERSION = '1.1.2';
+	const PLUGIN_VERSION = '1.1.3';
 	const PLUGIN_PREFIX  = 'w83-show-current-width';
 
 	const OPTION_DEFAULT_BREAKPOINTS_DEFINITION     = <<< EOT
@@ -206,14 +206,16 @@ class W83ShowCurrentWidth_Core {
 						'href'   => '#',
 					)
 				);
-				$i = 1;
+				$breakpoint_index = 0;
 				foreach ( $breakpoints as $breakpoint ) {
 					$wp_admin_bar->add_node(
 						array(
-							'id'     => self::PLUGIN_PREFIX . '-breakpoint-' . $i,
+							'id'     => self::PLUGIN_PREFIX . '-breakpoint-' . $breakpoint_index,
 							'title'  =>
 								sprintf(
-									'<span class="name">%s:</span><span class="range">%s &le; %s < %s</span>',
+									'<span class="icon"></span>' .
+									'<span class="name">%s:</span>' .
+									'<span class="range">%s &le; %s < %s</span>',
 									$breakpoint[3],
 									$breakpoint[0],
 									$breakpoint[2],
@@ -223,7 +225,7 @@ class W83ShowCurrentWidth_Core {
 							'href'   => '#',
 						)
 					);
-					$i++;
+					$breakpoint_index++;
 				}
 			} else {
 				// No display breakpoint.
