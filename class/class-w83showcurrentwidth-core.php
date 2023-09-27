@@ -153,7 +153,9 @@ class W83ShowCurrentWidth_Core {
 			plugins_url( 'assets/show-current-width.min.js', dirname( __FILE__ ) ),
 			array(),
 			self::PLUGIN_VERSION,
-			true
+			array(
+				'strategy' => 'defer',
+			)
 		);
 		// Pass variables to JavaScript.
 		$pass_to_js = array(

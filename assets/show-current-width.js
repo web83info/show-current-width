@@ -7,7 +7,7 @@ class ShowCurrentWidth {
 		this.timeoutCountUp = undefined;
 		this.delay = 500;
 		this.widthFrom = 0;
-		this.widthTo =window.innerWidth;
+		this.widthTo = window.innerWidth;
 		this.widthNow = 0;
 		this.countUpProceeding = false;
 		window.addEventListener('load', this.showWidth());
@@ -19,10 +19,10 @@ class ShowCurrentWidth {
 		if(1 == W83ShowCurrentWidth.animation_show) {
 			// Animation
 			this.countUpProceeding = true;
-			this.showWidthWithAnimation(this.widthFrom, this.widthTo);
+			this.showWidthWithAnimation();
 		} else {
 			// No animation
-			this.showWidthWithoutAnimation(this.widthTo);
+			this.showWidthWithoutAnimation();
 		}
 	}
 
