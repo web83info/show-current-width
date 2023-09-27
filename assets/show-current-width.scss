@@ -49,8 +49,11 @@
 			}
 		}
 		[id ^= "wp-admin-bar-w83-show-current-width-breakpoint-"] {
+			.icon {
+				display: inline-block;
+				width: 1rem;
+			}
 			.name {
-				margin-left: 1rem;
 				display: inline-block;
 				width: 9rem;
 			}
