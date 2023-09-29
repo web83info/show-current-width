@@ -102,11 +102,7 @@ class W83ShowCurrentWidth_Core {
 	 * @return void
 	 */
 	public function load_textdomain() {
-		load_plugin_textdomain(
-			self::PLUGIN_PREFIX,
-			false,
-			plugin_basename( dirname( dirname( __FILE__ ) ) ) . '/languages'
-		);
+		load_plugin_textdomain( self::PLUGIN_PREFIX );
 	}
 
 	/**
@@ -204,7 +200,7 @@ class W83ShowCurrentWidth_Core {
 				$wp_admin_bar->add_node(
 					array(
 						'id'     => self::PLUGIN_PREFIX . '-breakpoint',
-						'title'  => '<span class="label">' . esc_html__( 'Breakpoint:', 'w83-show-current-width' ) . '</span>' .
+						'title'  => '<span class="label">' . esc_html__( 'Breakpoint:', 'show-current-width' ) . '</span>' .
 										'<span class="breakpoint-wrap"><span class="breakpoint"></span></span>',
 						'parent' => self::PLUGIN_PREFIX,
 						'href'   => '#',
