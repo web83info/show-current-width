@@ -22,8 +22,10 @@ class W83ShowCurrentWidth_Core {
 	/**
 	 * Plugin constant.
 	 */
-	const PLUGIN_VERSION = '1.1.5';
-	const PLUGIN_PREFIX  = 'w83-show-current-width';
+	const PLUGIN_VERSION      = '1.1.6';
+	const PLUGIN_PREFIX       = 'w83-show-current-width';
+	const PLUGIN_PREFIX_SHORT = 'show-current-width';
+	const PLUGIN_GITHUB       = 'https://github.com/web83info/show-current-width';
 
 	const OPTION_DEFAULT_BREAKPOINTS_DEFINITION     = <<< EOT
 		0,576,xs,X-Small
@@ -100,11 +102,7 @@ class W83ShowCurrentWidth_Core {
 	 * @return void
 	 */
 	public function load_textdomain() {
-		load_plugin_textdomain(
-			self::PLUGIN_PREFIX,
-			false,
-			plugin_basename( dirname( dirname( __FILE__ ) ) ) . '/languages'
-		);
+		load_plugin_textdomain( self::PLUGIN_PREFIX );
 	}
 
 	/**
@@ -202,7 +200,7 @@ class W83ShowCurrentWidth_Core {
 				$wp_admin_bar->add_node(
 					array(
 						'id'     => self::PLUGIN_PREFIX . '-breakpoint',
-						'title'  => '<span class="label">' . esc_html__( 'Breakpoint:', 'w83-show-current-width' ) . '</span>' .
+						'title'  => '<span class="label">' . esc_html__( 'Breakpoint:', 'show-current-width' ) . '</span>' .
 										'<span class="breakpoint-wrap"><span class="breakpoint"></span></span>',
 						'parent' => self::PLUGIN_PREFIX,
 						'href'   => '#',

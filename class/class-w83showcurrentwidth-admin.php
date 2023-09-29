@@ -31,6 +31,12 @@ class W83ShowCurrentWidth_Admin {
 
 		// Register settings.
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
+
+		// Add links to plugin setting page and GitHub on wp-admin/plugins.php.
+		add_filter(
+			'plugin_action_links_' . W83ShowCurrentWidth_Core::PLUGIN_PREFIX_SHORT . '/' . W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '.php',
+			array( $this, 'plugin_action_links' )
+		);
 	}
 
 	/**
@@ -57,7 +63,7 @@ class W83ShowCurrentWidth_Admin {
 	public function register_option_page_html() {
 		echo '<div class="wrap">';
 		echo '<h1>Show Current Width</h1>';
-		echo '<p>' . esc_html__( 'Screen width can be displayed in the WordPress admin bar.', 'w83-show-current-width' ) . '</p>';
+		echo '<p>' . esc_html__( 'Screen width can be displayed in the WordPress admin bar.', 'show-current-width' ) . '</p>';
 		echo '<form method="post" action="options.php">';
 		settings_fields( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1' );
 		do_settings_sections( W83ShowCurrentWidth_Core::PLUGIN_PREFIX );
@@ -76,7 +82,7 @@ class W83ShowCurrentWidth_Admin {
 		// ID, Title, Callback function, Setting page slug.
 		add_settings_section(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
-			__( 'Breakpoint settings', 'w83-show-current-width' ),
+			__( 'Breakpoint settings', 'show-current-width' ),
 			array( $this, 'register_section1_html' ),
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX
 		);
@@ -84,7 +90,7 @@ class W83ShowCurrentWidth_Admin {
 		// ID, Label, Callback function, Setting page slug, Section ID.
 		add_settings_field(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_show',
-			__( 'Display breakpoint names', 'w83-show-current-width' ),
+			__( 'Display breakpoint names', 'show-current-width' ),
 			array( $this, 'register_field_breakpoints_show_html' ),
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
@@ -95,7 +101,7 @@ class W83ShowCurrentWidth_Admin {
 		// Add field 1-2 (Breakpoint definiiton).
 		add_settings_field(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition',
-			__( 'Breakpoint definiiton', 'w83-show-current-width' ),
+			__( 'Breakpoint definiiton', 'show-current-width' ),
 			array( $this, 'register_field_breakpoints_definition_html' ),
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
@@ -109,7 +115,7 @@ class W83ShowCurrentWidth_Admin {
 		// c (Max width to show width icon).
 		add_settings_field(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
-			__( 'Width limit to show screen width', 'w83-show-current-width' ),
+			__( 'Width limit to show screen width', 'show-current-width' ),
 			array( $this, 'register_field_breakpoints_limitwidth_html' ),
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
@@ -120,7 +126,7 @@ class W83ShowCurrentWidth_Admin {
 		// Add field 1-4 (Animation on/off).
 		add_settings_field(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
-			__( 'Animation', 'w83-show-current-width' ),
+			__( 'Animation', 'show-current-width' ),
 			array( $this, 'register_field_animation_show_html' ),
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
@@ -132,14 +138,14 @@ class W83ShowCurrentWidth_Admin {
 		// Add section 2.
 		add_settings_section(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
-			__( 'Admin page settings', 'w83-show-current-width' ),
+			__( 'Admin page settings', 'show-current-width' ),
 			array( $this, 'register_section2_html' ),
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX
 		);
 		// Add field 2-1 (Admin page display).
 		add_settings_field(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_admin_show',
-			__( 'Admin page display', 'w83-show-current-width' ),
+			__( 'Admin page display', 'show-current-width' ),
 			array( $this, 'register_field_admin_show_html' ),
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
@@ -151,14 +157,14 @@ class W83ShowCurrentWidth_Admin {
 		// Add section 3.
 		add_settings_section(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section3',
-			__( 'Other settings', 'w83-show-current-width' ),
+			__( 'Other settings', 'show-current-width' ),
 			array( $this, 'register_section3_html' ),
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX
 		);
 		// Add field 3-1 (Init).
 		add_settings_field(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_init',
-			__( 'Initialize the settings', 'w83-show-current-width' ),
+			__( 'Initialize the settings', 'show-current-width' ),
 			array( $this, 'register_field_other_init_html' ),
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section3',
@@ -169,7 +175,7 @@ class W83ShowCurrentWidth_Admin {
 		// Add field 3-2 (Uninstall).
 		add_settings_field(
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall',
-			__( 'Delete the settings when uninstall', 'w83-show-current-width' ),
+			__( 'Delete the settings when uninstall', 'show-current-width' ),
 			array( $this, 'register_field_other_uninstall_html' ),
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
 			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section3',
@@ -185,7 +191,7 @@ class W83ShowCurrentWidth_Admin {
 	 * @return void
 	 */
 	public function register_section1_html() {
-		echo esc_html__( 'Setting about breakpoints', 'w83-show-current-width' );
+		echo esc_html__( 'Setting about breakpoints', 'show-current-width' );
 	}
 
 	/**
@@ -207,7 +213,7 @@ class W83ShowCurrentWidth_Admin {
 		printf(
 			'<label for="%s_breakpoints_show">%s</label>',
 			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_html__( 'Display breakpoint names', 'w83-show-current-width' )
+			esc_html__( 'Display breakpoint names', 'show-current-width' )
 		);
 	}
 
@@ -225,11 +231,11 @@ class W83ShowCurrentWidth_Admin {
 		);
 		echo '<p>';
 		echo '<code>';
-		echo esc_html__( 'Min width, Max width, Breakpoint abbr, Breakpoint name', 'w83-show-current-width' );
+		echo esc_html__( 'Min width, Max width, Breakpoint abbr, Breakpoint name', 'show-current-width' );
 		echo '</code>';
 		echo '</p>';
 		echo '<p>';
-		echo esc_html__( 'Each breakpoint is separated by a new line.', 'w83-show-current-width' );
+		echo esc_html__( 'Each breakpoint is separated by a new line.', 'show-current-width' );
 		echo '</p>';
 	}
 
@@ -252,7 +258,7 @@ class W83ShowCurrentWidth_Admin {
 		printf(
 			'<label for="%s_breakpoints_limitwidth">%s</label>',
 			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_html__( 'Show current width when the it is in the following range. ', 'w83-show-current-width' )
+			esc_html__( 'Show current width when the it is in the following range. ', 'show-current-width' )
 		);
 		printf(
 			'<input type="text" name="%s_breakpoints_limitwidth_min" id="%s_breakpoints_limitwidth_min" class="small-text" value="%s" /> ~ ',
@@ -287,7 +293,7 @@ class W83ShowCurrentWidth_Admin {
 		printf(
 			'<label for="%s_animation_show">%s</label>',
 			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_html__( 'Enable count up animation', 'w83-show-current-width' )
+			esc_html__( 'Enable count up animation', 'show-current-width' )
 		);
 	}
 
@@ -297,7 +303,7 @@ class W83ShowCurrentWidth_Admin {
 	 * @return void
 	 */
 	public function register_section2_html() {
-		echo esc_html__( 'Setting about admin page', 'w83-show-current-width' );
+		echo esc_html__( 'Setting about admin page', 'show-current-width' );
 	}
 
 	/**
@@ -319,7 +325,7 @@ class W83ShowCurrentWidth_Admin {
 		printf(
 			'<label for="%s_admin_show">%s</label>',
 			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_html__( 'Display screen width on admin page', 'w83-show-current-width' )
+			esc_html__( 'Display screen width on admin page', 'show-current-width' )
 		);
 	}
 
@@ -329,7 +335,7 @@ class W83ShowCurrentWidth_Admin {
 	 * @return void
 	 */
 	public function register_section3_html() {
-		echo esc_html__( 'Other settings which are not included in the above', 'w83-show-current-width' );
+		echo esc_html__( 'Other settings which are not included in the above', 'show-current-width' );
 	}
 
 	/**
@@ -351,7 +357,7 @@ class W83ShowCurrentWidth_Admin {
 		printf(
 			'<label for="%s_other_init">%s</label>',
 			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_html__( 'Initialize all the settings to default values', 'w83-show-current-width' )
+			esc_html__( 'Initialize all the settings to default values', 'show-current-width' )
 		);
 	}
 
@@ -374,7 +380,7 @@ class W83ShowCurrentWidth_Admin {
 		printf(
 			'<label for="%s_other_uninstall">%s</label>',
 			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_html__( 'Delete all the settings when this plugin is uninstalled', 'w83-show-current-width' )
+			esc_html__( 'Delete all the settings when this plugin is uninstalled', 'show-current-width' )
 		);
 	}
 
@@ -431,4 +437,26 @@ class W83ShowCurrentWidth_Admin {
 			'esc_attr',
 		);
 	}
+
+	/**
+	 * Add links to plugin setting page and GitHub on wp-admin/plugins.php.
+	 *
+	 * @param array $actions Links for action.
+	 * @return array Links for action.
+	 */
+	public function plugin_action_links( $actions ) {
+		$link_setting = sprintf(
+			'<a href="%s">%s</a>',
+			admin_url( 'options-general.php?page=' . W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			__( 'Settings' )
+		);
+		$link_github  = sprintf(
+			'<a href="%s">%s</a>',
+			W83ShowCurrentWidth_Core::PLUGIN_GITHUB,
+			'GitHub'
+		);
+		array_unshift( $actions, $link_setting, $link_github );
+		return $actions;
+	}
+
 }
