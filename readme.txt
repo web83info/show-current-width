@@ -4,7 +4,7 @@ Tags: admin,width,developement
 Requires at least: 6.2
 Tested up to: 6.3.1
 Requires PHP: 7.4
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,6 +18,10 @@ This plugin shows a current screen width on WP adminbar.
 * No FAQ for now.
 
 == Changelog ==
+
+= 1.1.6 - 2023-09-29 =
+* Add: Add links to plugin setting page and GitHub on wp-admin/plugins.php.
+* Add: Use GlotPress instead of local translation.
 
 = 1.1.5 - 2023-09-28 =
 * Fix: Replace show-current-width.min.js which was not compressed correctly.
