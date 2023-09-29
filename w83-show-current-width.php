@@ -11,8 +11,6 @@
  * Author URI:
  * Requires License:    no
  * License:             GPLv2+
- * Text Domain:         w83-show-current-width
- * Domain Path:         /languages
  *
  * @package Show_Current_Width
  * @author  web83info
