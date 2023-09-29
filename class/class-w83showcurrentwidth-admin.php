@@ -31,6 +31,12 @@ class W83ShowCurrentWidth_Admin {
 
 		// Register settings.
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
+
+		// Add links to plugin setting page and GitHub on wp-admin/plugins.php.
+		add_filter(
+			'plugin_action_links_' . W83ShowCurrentWidth_Core::PLUGIN_PREFIX_SHORT . '/' . W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '.php',
+			array( $this, 'plugin_action_links' )
+		);
 	}
 
 	/**
@@ -431,4 +437,26 @@ class W83ShowCurrentWidth_Admin {
 			'esc_attr',
 		);
 	}
+
+	/**
+	 * Add links to plugin setting page and GitHub on wp-admin/plugins.php.
+	 *
+	 * @param array $actions Links for action.
+	 * @return array Links for action.
+	 */
+	public function plugin_action_links( $actions ) {
+		$link_setting = sprintf(
+			'<a href="%s">%s</a>',
+			admin_url( 'options-general.php?page=' . W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			__( 'Settings' )
+		);
+		$link_github  = sprintf(
+			'<a href="%s">%s</a>',
+			W83ShowCurrentWidth_Core::PLUGIN_GITHUB,
+			'GitHub'
+		);
+		array_unshift( $actions, $link_setting, $link_github );
+		return $actions;
+	}
+
 }
