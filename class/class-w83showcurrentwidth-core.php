@@ -22,8 +22,10 @@ class W83ShowCurrentWidth_Core {
 	/**
 	 * Plugin constant.
 	 */
-	const PLUGIN_VERSION = '1.1.5';
-	const PLUGIN_PREFIX  = 'w83-show-current-width';
+	const PLUGIN_VERSION      = '1.1.5';
+	const PLUGIN_PREFIX       = 'w83-show-current-width';
+	const PLUGIN_PREFIX_SHORT = 'show-current-width';
+	const PLUGIN_GITHUB       = 'https://github.com/web83info/show-current-width';
 
 	const OPTION_DEFAULT_BREAKPOINTS_DEFINITION     = <<< EOT
 		0,576,xs,X-Small
