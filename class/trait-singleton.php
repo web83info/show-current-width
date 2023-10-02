@@ -1,11 +1,11 @@
 <?php
 /**
- * W83ShowCurrentWidth_Core
+ * ShowCurrentWidth_Core
  *
  * @package None
  */
 
-namespace W83ShowCurrentWidth;
+namespace ShowCurrentWidth;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
