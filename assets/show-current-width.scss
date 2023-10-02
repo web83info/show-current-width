@@ -9,7 +9,7 @@
 #wpadminbar {
 	.ab-top-menu {
 		// Parent.
-		#wp-admin-bar-w83-show-current-width {
+		#wp-admin-bar-show-current-width {
 			> .ab-item {
 				// ◀▶ Icon.
 				.ab-icon {
@@ -35,7 +35,7 @@
 			}
 		}
 		// Child.
-		#wp-admin-bar-w83-show-current-width-breakpoint {
+		#wp-admin-bar-show-current-width-breakpoint {
 			> .ab-item {
 				.label {
 					margin-right: .25rem;
@@ -48,7 +48,7 @@
 				}
 			}
 		}
-		[id ^= "wp-admin-bar-w83-show-current-width-breakpoint-"] {
+		[id ^= "wp-admin-bar-show-current-width-breakpoint-"] {
 			.icon {
 				display: inline-block;
 				width: 1rem;
@@ -69,7 +69,7 @@
 	#wpadminbar {
 		.ab-top-menu {
 			// Parent
-			#wp-admin-bar-w83-show-current-width {
+			#wp-admin-bar-show-current-width {
 				position: static;
 				display: block;
 				> .ab-item {
@@ -108,7 +108,7 @@
 				}
 			}
 			// Child
-			// #wp-admin-bar-w83-show-current-width-breakpoint {
+			// #wp-admin-bar-show-current-width-breakpoint {
 			//     > .ab-item {
 			//         .label {}
 			//             .breakpoint-wrap {
@@ -116,7 +116,7 @@
 			//         }
 			//     }
 			// }
-			// [id ^= "wp-admin-bar-w83-show-current-width-breakpoint-"] {
+			// [id ^= "wp-admin-bar-show-current-width-breakpoint-"] {
 			// }
 		}
 	}

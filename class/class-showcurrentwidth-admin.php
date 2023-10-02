@@ -1,11 +1,11 @@
 <?php
 /**
- * W83ShowCurrentWidth_Admin
+ * ShowCurrentWidth_Admin
  *
  * @package Show_Current_Width
  */
 
-namespace W83ShowCurrentWidth;
+namespace ShowCurrentWidth;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Admin class
  */
-class W83ShowCurrentWidth_Admin {
+class ShowCurrentWidth_Admin {
 
 	// Singleton trait.
 	use Singleton;
@@ -34,7 +34,7 @@ class W83ShowCurrentWidth_Admin {
 
 		// Add links to plugin setting page and GitHub on wp-admin/plugins.php.
 		add_filter(
-			'plugin_action_links_' . W83ShowCurrentWidth_Core::PLUGIN_PREFIX_SHORT . '/' . W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '.php',
+			'plugin_action_links_' . ShowCurrentWidth_Core::PLUGIN_PREFIX . '/' . ShowCurrentWidth_Core::PLUGIN_PREFIX_DEPRECATED . '.php',
 			array( $this, 'plugin_action_links' )
 		);
 	}
@@ -50,7 +50,7 @@ class W83ShowCurrentWidth_Admin {
 			'Show Current Width',
 			'Show Current Width',
 			'manage_options',
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			ShowCurrentWidth_Core::PLUGIN_PREFIX,
 			array( $this, 'register_option_page_html' )
 		);
 	}
@@ -65,8 +65,8 @@ class W83ShowCurrentWidth_Admin {
 		echo '<h1>Show Current Width</h1>';
 		echo '<p>' . esc_html__( 'Screen width can be displayed in the WordPress admin bar.', 'show-current-width' ) . '</p>';
 		echo '<form method="post" action="options.php">';
-		settings_fields( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1' );
-		do_settings_sections( W83ShowCurrentWidth_Core::PLUGIN_PREFIX );
+		settings_fields( ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1' );
+		do_settings_sections( ShowCurrentWidth_Core::PLUGIN_PREFIX );
 		submit_button();
 		echo '</form>';
 		echo '</div>';
@@ -81,32 +81,32 @@ class W83ShowCurrentWidth_Admin {
 		// Add section 1.
 		// ID, Title, Callback function, Setting page slug.
 		add_settings_section(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
 			__( 'Breakpoint settings', 'show-current-width' ),
 			array( $this, 'register_section1_html' ),
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX
+			ShowCurrentWidth_Core::PLUGIN_PREFIX
 		);
 		// Add field 1-1 (Display breakpoint names).
 		// ID, Label, Callback function, Setting page slug, Section ID.
 		add_settings_field(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_show',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_show',
 			__( 'Display breakpoint names', 'show-current-width' ),
 			array( $this, 'register_field_breakpoints_show_html' ),
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
 			array(
-				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_show',
+				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_show',
 			),
 		);
 		// Add field 1-2 (Breakpoint definiiton).
 		add_settings_field(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition',
 			__( 'Breakpoint definiiton', 'show-current-width' ),
 			array( $this, 'register_field_breakpoints_definition_html' ),
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
 			array(
-				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition',
+				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition',
 			),
 		);
 		// Add field 1-3.
@@ -114,73 +114,73 @@ class W83ShowCurrentWidth_Admin {
 		// b (Min width to show width icon).
 		// c (Max width to show width icon).
 		add_settings_field(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
 			__( 'Width limit to show screen width', 'show-current-width' ),
 			array( $this, 'register_field_breakpoints_limitwidth_html' ),
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
 			array(
-				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
+				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
 			),
 		);
 		// Add field 1-4 (Animation on/off).
 		add_settings_field(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
 			__( 'Animation', 'show-current-width' ),
 			array( $this, 'register_field_animation_show_html' ),
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
 			array(
-				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
+				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
 			),
 		);
 
 		// Add section 2.
 		add_settings_section(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
 			__( 'Admin page settings', 'show-current-width' ),
 			array( $this, 'register_section2_html' ),
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX
+			ShowCurrentWidth_Core::PLUGIN_PREFIX
 		);
 		// Add field 2-1 (Admin page display).
 		add_settings_field(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_admin_show',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_admin_show',
 			__( 'Admin page display', 'show-current-width' ),
 			array( $this, 'register_field_admin_show_html' ),
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
 			array(
-				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_admin_show',
+				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_admin_show',
 			),
 		);
 
 		// Add section 3.
 		add_settings_section(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section3',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section3',
 			__( 'Other settings', 'show-current-width' ),
 			array( $this, 'register_section3_html' ),
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX
+			ShowCurrentWidth_Core::PLUGIN_PREFIX
 		);
 		// Add field 3-1 (Init).
 		add_settings_field(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_init',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_init',
 			__( 'Initialize the settings', 'show-current-width' ),
 			array( $this, 'register_field_other_init_html' ),
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section3',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section3',
 			array(
-				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_init',
+				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_init',
 			),
 		);
 		// Add field 3-2 (Uninstall).
 		add_settings_field(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall',
 			__( 'Delete the settings when uninstall', 'show-current-width' ),
 			array( $this, 'register_field_other_uninstall_html' ),
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX,
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section3',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section3',
 			array(
-				'label_for' => W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall',
+				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall',
 			),
 		);
 	}
@@ -202,17 +202,17 @@ class W83ShowCurrentWidth_Admin {
 	public function register_field_breakpoints_show_html() {
 		printf(
 			'<input type="hidden" name="%s_breakpoints_show" value="0" />',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX )
 		);
 		printf(
 			'<input type="checkbox" name="%s_breakpoints_show" id="%s_breakpoints_show" value="1" %s />',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_show' ), '1', false )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			checked( get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_show' ), '1', false )
 		);
 		printf(
 			'<label for="%s_breakpoints_show">%s</label>',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
 			esc_html__( 'Display breakpoint names', 'show-current-width' )
 		);
 	}
@@ -225,9 +225,9 @@ class W83ShowCurrentWidth_Admin {
 	public function register_field_breakpoints_definition_html() {
 		printf(
 			'<textarea rows="8" cols="30" name="%s_breakpoints_definition" id="%s_breakpoints_definition">%s</textarea>',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_html( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition' ) )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_html( get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition' ) )
 		);
 		echo '<p>';
 		echo '<code>';
@@ -247,30 +247,30 @@ class W83ShowCurrentWidth_Admin {
 	public function register_field_breakpoints_limitwidth_html() {
 		printf(
 			'<input type="hidden" name="%s_breakpoints_limitwidth" value="0" />',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX )
 		);
 		printf(
 			'<input type="checkbox" name="%s_breakpoints_limitwidth" id="%s_breakpoints_limitwidth" value="1" %s />',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth' ), '1', false )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			checked( get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth' ), '1', false )
 		);
 		printf(
 			'<label for="%s_breakpoints_limitwidth">%s</label>',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
 			esc_html__( 'Show current width when the it is in the following range. ', 'show-current-width' )
 		);
 		printf(
 			'<input type="text" name="%s_breakpoints_limitwidth_min" id="%s_breakpoints_limitwidth_min" class="small-text" value="%s" /> ~ ',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_min' ) )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_min' ) )
 		);
 		printf(
 			'<input type="text" name="%s_breakpoints_limitwidth_max" id="%s_breakpoints_limitwidth_max" class="small-text" value="%s" /> px',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_max' ) )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_max' ) )
 		);
 	}
 
@@ -282,17 +282,17 @@ class W83ShowCurrentWidth_Admin {
 	public function register_field_animation_show_html() {
 		printf(
 			'<input type="hidden" name="%s_animation_show" value="0" />',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX )
 		);
 		printf(
 			'<input type="checkbox" name="%s_animation_show" id="%s_animation_show" value="1" %s />',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show' ), '1', false )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			checked( get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show' ), '1', false )
 		);
 		printf(
 			'<label for="%s_animation_show">%s</label>',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
 			esc_html__( 'Enable count up animation', 'show-current-width' )
 		);
 	}
@@ -314,17 +314,17 @@ class W83ShowCurrentWidth_Admin {
 	public function register_field_admin_show_html() {
 		printf(
 			'<input type="hidden" name="%s_admin_show" value="0" />',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX )
 		);
 		printf(
 			'<input type="checkbox" name="%s_admin_show" id="%s_admin_show" value="1" %s />',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_admin_show' ), '1', false )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			checked( get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_admin_show' ), '1', false )
 		);
 		printf(
 			'<label for="%s_admin_show">%s</label>',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
 			esc_html__( 'Display screen width on admin page', 'show-current-width' )
 		);
 	}
@@ -346,17 +346,17 @@ class W83ShowCurrentWidth_Admin {
 	public function register_field_other_init_html() {
 		printf(
 			'<input type="hidden" name="%s_other_init" value="0" />',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX )
 		);
 		printf(
 			'<input type="checkbox" name="%s_other_init" id="%s_other_init" value="1" %s />',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_init' ), '1', false )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			checked( get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_init' ), '1', false )
 		);
 		printf(
 			'<label for="%s_other_init">%s</label>',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
 			esc_html__( 'Initialize all the settings to default values', 'show-current-width' )
 		);
 	}
@@ -369,17 +369,17 @@ class W83ShowCurrentWidth_Admin {
 	public function register_field_other_uninstall_html() {
 		printf(
 			'<input type="hidden" name="%s_other_uninstall" value="0" />',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX )
 		);
 		printf(
 			'<input type="checkbox" name="%s_other_uninstall" id="%s_other_uninstall" value="1" %s />',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			checked( get_option( W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall' ), '1', false )
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			checked( get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall' ), '1', false )
 		);
 		printf(
 			'<label for="%s_other_uninstall">%s</label>',
-			esc_attr( W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
 			esc_html__( 'Delete all the settings when this plugin is uninstalled', 'show-current-width' )
 		);
 	}
@@ -392,48 +392,48 @@ class W83ShowCurrentWidth_Admin {
 	public function register_settings() {
 		// Group name, input name, Sanitize function.
 		register_setting(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_definition',
 			'esc_html',
 		);
 		register_setting(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_show',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_show',
 			'esc_attr',
 		);
 		register_setting(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
 			'esc_attr',
 		);
 		register_setting(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_min',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_min',
 			'esc_attr',
 		);
 		register_setting(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_max',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth_max',
 			'esc_attr',
 		);
 		register_setting(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
 			'esc_attr',
 		);
 		register_setting(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_admin_show',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_admin_show',
 			'esc_attr',
 		);
 		register_setting(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_init',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_init',
 			'esc_attr',
 		);
 		register_setting(
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
-			W83ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall',
 			'esc_attr',
 		);
 	}
@@ -447,12 +447,12 @@ class W83ShowCurrentWidth_Admin {
 	public function plugin_action_links( $actions ) {
 		$link_setting = sprintf(
 			'<a href="%s">%s</a>',
-			admin_url( 'options-general.php?page=' . W83ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			__( 'Settings' )
+			admin_url( 'options-general.php?page=' . ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			__( 'Settings', 'show-current-width' )
 		);
 		$link_github  = sprintf(
 			'<a href="%s">%s</a>',
-			W83ShowCurrentWidth_Core::PLUGIN_GITHUB,
+			ShowCurrentWidth_Core::PLUGIN_GITHUB,
 			'GitHub'
 		);
 		array_unshift( $actions, $link_setting, $link_github );

@@ -18,15 +18,10 @@
  * @license
  */
 
-namespace W83ShowCurrentWidth;
+namespace ShowCurrentWidth;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once 'class/trait-singleton.php';
-require_once 'class/class-w83showcurrentwidth-core.php';
-require_once 'class/class-w83showcurrentwidth-admin.php';
-
-$w83_show_current_width_core  = W83ShowCurrentWidth_Core::get_instance();
-$w83_show_current_width_admin = W83ShowCurrentWidth_Admin::get_instance();
+require_once 'show-current-width.php';
