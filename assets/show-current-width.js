@@ -16,7 +16,7 @@ class ShowCurrentWidth {
 
 	showWidth() {
 		this.widthTo = window.innerWidth;
-		if(1 == W83ShowCurrentWidth.animation_show) {
+		if(1 == ShowCurrentWidthVariables.animation_show) {
 			// Animation
 			this.countUpProceeding = true;
 			this.showWidthWithAnimation();
@@ -63,7 +63,7 @@ class ShowCurrentWidth {
 		let breakPointCurrent = new Array();
 		let breakPointCurrentIcon = '»';
 		let icon = undefined;
-		W83ShowCurrentWidth.breakpoints_definition.split('\n').forEach((line, index) => {
+		ShowCurrentWidthVariables.breakpoints_definition.split('\n').forEach((line, index) => {
 			let items = line.trim().split(/\s*,\s*/);
 			if (items[0] <= this.widthNow && this.widthNow < items[1]) {
 				breakPointShort = items[2];
@@ -73,18 +73,18 @@ class ShowCurrentWidth {
 				breakPointCurrent[index] = false;
 			}
 		});
-		document.querySelector('#wp-admin-bar-w83-show-current-width .ab-icon .width').textContent = Math.round(width);
-		document.querySelector('#wp-admin-bar-w83-show-current-width .ab-label .width').textContent = Math.round(width);
-		if (1 == W83ShowCurrentWidth.breakpoints_show) {
-			document.querySelector('#wp-admin-bar-w83-show-current-width .breakpoint').textContent = breakPointShort;
-			document.querySelector('#wp-admin-bar-w83-show-current-width-breakpoint .breakpoint').textContent = breakPointLong;
+		document.querySelector('#wp-admin-bar-show-current-width .ab-icon .width').textContent = Math.round(width);
+		document.querySelector('#wp-admin-bar-show-current-width .ab-label .width').textContent = Math.round(width);
+		if (1 == ShowCurrentWidthVariables.breakpoints_show) {
+			document.querySelector('#wp-admin-bar-show-current-width .breakpoint').textContent = breakPointShort;
+			document.querySelector('#wp-admin-bar-show-current-width-breakpoint .breakpoint').textContent = breakPointLong;
 			breakPointCurrent.forEach((element, index) => {
 				if( element ) {
 					icon = breakPointCurrentIcon;
 				} else {
 					icon = '';
 				}
-				document.querySelector('#wp-admin-bar-w83-show-current-width-breakpoint-' + index + ' .icon').textContent = icon;
+				document.querySelector('#wp-admin-bar-show-current-width-breakpoint-' + index + ' .icon').textContent = icon;
 			});
 		}
 	}

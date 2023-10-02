@@ -1,11 +1,11 @@
 <?php
 /**
- * W83ShowCurrentWidth_Core
+ * ShowCurrentWidth_Core
  *
  * @package Show_Current_Width
  */
 
-namespace W83ShowCurrentWidth;
+namespace ShowCurrentWidth;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Core class
  */
-class W83ShowCurrentWidth_Core {
+class ShowCurrentWidth_Core {
 
 	// Singleton trait.
 	use Singleton;
@@ -22,10 +22,10 @@ class W83ShowCurrentWidth_Core {
 	/**
 	 * Plugin constant.
 	 */
-	const PLUGIN_VERSION      = '1.1.6';
-	const PLUGIN_PREFIX       = 'w83-show-current-width';
-	const PLUGIN_PREFIX_SHORT = 'show-current-width';
-	const PLUGIN_GITHUB       = 'https://github.com/web83info/show-current-width';
+	const PLUGIN_VERSION           = '1.2.0';
+	const PLUGIN_PREFIX            = 'show-current-width';
+	const PLUGIN_PREFIX_DEPRECATED = 'w83-show-current-width';
+	const PLUGIN_GITHUB            = 'https://github.com/web83info/show-current-width';
 
 	const OPTION_DEFAULT_BREAKPOINTS_DEFINITION     = <<< EOT
 		0,576,xs,X-Small
@@ -46,7 +46,7 @@ class W83ShowCurrentWidth_Core {
 
 	/**
 	 * Default values for table 'options'.
-	 * Saved under the key 'w83-show-current-width_*'.
+	 * Saved under the key 'show-current-width_*'.
 	 *
 	 * @var array
 	 */
@@ -68,7 +68,16 @@ class W83ShowCurrentWidth_Core {
 	 * @return void
 	 */
 	private function __construct() {
-		// Initialize if option 'w83-show-current-width_other_init' is checked.
+		// Update deprecated options (Remove prefix w83-).
+		foreach ( $this->settings as $option_key => $option_value ) {
+			$option = get_option( self::PLUGIN_PREFIX_DEPRECATED . '_' . $option_key );
+			if ( false !== $option ) {
+				update_option( self::PLUGIN_PREFIX . '_' . $option_key, $option );
+				delete_option( self::PLUGIN_PREFIX_DEPRECATED . '_' . $option_key );
+			}
+		}
+
+		// Initialize if option 'show-current-width_other_init' is checked.
 		if ( '1' === get_option( self::PLUGIN_PREFIX . '_other_init' ) ) {
 			foreach ( $this->settings as $option_key => $option_value ) {
 				delete_option( self::PLUGIN_PREFIX . '_' . $option_key );
@@ -134,7 +143,7 @@ class W83ShowCurrentWidth_Core {
 			);
 			$css = <<< EOT
 			@media (max-width: {$limitwidth_min}px),  (min-width: {$limitwidth_max}px) {
-				#wp-admin-bar-w83-show-current-width {
+				#wp-admin-bar-show-current-width {
 					display: none !important;
 				}
 			}
@@ -155,13 +164,14 @@ class W83ShowCurrentWidth_Core {
 				'strategy' => 'defer',
 			)
 		);
+
 		// Pass variables to JavaScript.
 		$pass_to_js = array(
 			'breakpoints_definition' => get_option( self::PLUGIN_PREFIX . '_breakpoints_definition' ),
 			'breakpoints_show'       => get_option( self::PLUGIN_PREFIX . '_breakpoints_show' ),
 			'animation_show'         => get_option( self::PLUGIN_PREFIX . '_animation_show' ),
 		);
-		wp_localize_script( self::PLUGIN_PREFIX . '-js', 'W83ShowCurrentWidth', $pass_to_js );
+		wp_localize_script( self::PLUGIN_PREFIX . '-js', 'ShowCurrentWidthVariables', $pass_to_js );
 	}
 
 	/**
