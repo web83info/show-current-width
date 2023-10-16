@@ -138,7 +138,7 @@ class ShowCurrentWidth_Admin {
 		// Add section 2.
 		add_settings_section(
 			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
-			__( 'Admin page settings', 'show-current-width' ),
+			__( 'Display condition settings', 'show-current-width' ),
 			array( $this, 'register_section2_html' ),
 			ShowCurrentWidth_Core::PLUGIN_PREFIX
 		);
@@ -151,6 +151,17 @@ class ShowCurrentWidth_Admin {
 			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
 			array(
 				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_admin_show',
+			),
+		);
+		// Add field 2-2 (Role condition).
+		add_settings_field(
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_condition_role',
+			__( 'Role condition', 'show-current-width' ),
+			array( $this, 'register_field_condition_role_html' ),
+			ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
+			array(
+				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_condition_role',
 			),
 		);
 
@@ -303,7 +314,7 @@ class ShowCurrentWidth_Admin {
 	 * @return void
 	 */
 	public function register_section2_html() {
-		echo esc_html__( 'Setting about admin page', 'show-current-width' );
+		echo esc_html__( 'Setting about display condition', 'show-current-width' );
 	}
 
 	/**
@@ -327,6 +338,36 @@ class ShowCurrentWidth_Admin {
 			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
 			esc_html__( 'Display screen width on admin page', 'show-current-width' )
 		);
+	}
+
+	/**
+	 * Field 2-2 HTML.
+	 *
+	 * @return void
+	 */
+	public function register_field_condition_role_html() {
+		global $wp_roles;
+		$roles = $wp_roles->roles;
+		echo esc_html__( 'Display width only for the user who has one of the following roles.', 'show-current-width' );
+		echo '<ul>';
+		foreach ( $roles as $role_key => $role_value ) {
+			echo '<li>';
+			printf(
+				'<input type="checkbox" name="%s_condition_role[]" id="%s_condition_role_%s" value="%s" %s />',
+				esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+				esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+				esc_attr( $role_key ),
+				esc_attr( $role_key ),
+				checked( in_array( $role_key, get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_condition_role' ), true ), true, false ),
+			);
+			printf(
+				'<label for="%s_condition_role_%s">%s</label>',
+				esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+				esc_attr( $role_key ),
+				esc_attr( translate_user_role( $role_value['name'] ) )
+			);
+			echo '</li>';
+		}
 	}
 
 	/**
@@ -428,6 +469,14 @@ class ShowCurrentWidth_Admin {
 		);
 		register_setting(
 			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_condition_role',
+			array(
+				'type'              => 'array',
+				'sanitize_callback' => array( $this, 'sanitize_array' ),
+			),
+		);
+		register_setting(
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
 			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_init',
 			'esc_attr',
 		);
@@ -436,6 +485,18 @@ class ShowCurrentWidth_Admin {
 			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_other_uninstall',
 			'esc_attr',
 		);
+	}
+
+	/**
+	 * Sanitize array.
+	 *
+	 * @param array $args array to be sanitized.
+	 * @return array array sanitized.
+	 */
+	public function sanitize_array( $args ) {
+		$args = isset( $args ) ? (array) $args : array();
+		$args = array_map( 'esc_attr', $args );
+		return $args;
 	}
 
 	/**
