@@ -22,7 +22,7 @@ class ShowCurrentWidth_Core {
 	/**
 	 * Plugin constant.
 	 */
-	const PLUGIN_VERSION           = '1.2.0';
+	const PLUGIN_VERSION           = '1.2.1';
 	const PLUGIN_PREFIX            = 'show-current-width';
 	const PLUGIN_PREFIX_DEPRECATED = 'w83-show-current-width';
 	const PLUGIN_GITHUB            = 'https://github.com/web83info/show-current-width';
@@ -41,6 +41,7 @@ class ShowCurrentWidth_Core {
 	const OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MAX = 9999;
 	const OPTION_DEFAULT_ANIMATION_SHOW             = 1;
 	const OPTION_DEFAULT_ADMIN_SHOW                 = 0;
+	const OPTION_DEFAULT_CONDITION_ROLE             = array( 'administrator' );
 	const OPTION_DEFAULT_OTHER_INIT                 = 0;
 	const OPTION_DEFAULT_OTHER_UNINSTALL            = 0;
 
@@ -58,6 +59,7 @@ class ShowCurrentWidth_Core {
 		'breakpoints_limitwidth_max' => self::OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MAX,
 		'animation_show'             => self::OPTION_DEFAULT_ANIMATION_SHOW,
 		'admin_show'                 => self::OPTION_DEFAULT_ADMIN_SHOW,
+		'condition_role'             => self::OPTION_DEFAULT_CONDITION_ROLE,
 		'other_init'                 => self::OPTION_DEFAULT_OTHER_INIT,
 		'other_uninstall'            => self::OPTION_DEFAULT_OTHER_UNINSTALL,
 	);
@@ -181,77 +183,86 @@ class ShowCurrentWidth_Core {
 	 * @return void
 	 */
 	public function display_width( $wp_admin_bar ) {
-		if ( ! is_admin() || get_option( self::PLUGIN_PREFIX . '_admin_show' ) ) {
-			if ( get_option( self::PLUGIN_PREFIX . '_breakpoints_show' ) ) {
-				// Display breakpoint.
-				$breakpoints_definition = str_replace(
-					array( "\r\n", "\r", "\n" ),
-					"\n",
-					get_option( self::PLUGIN_PREFIX . '_breakpoints_definition' )
-				);
-				$breakpoints            = explode( "\n", $breakpoints_definition );
-				foreach ( $breakpoints as $breakpoint_key => $breakpoint_value ) {
-					$breakpoints[ $breakpoint_key ] = explode( ',', $breakpoint_value );
-				}
+		// Return if not allowed in admin page.
+		if ( is_admin() && ! get_option( self::PLUGIN_PREFIX . '_admin_show' ) ) {
+			return;
+		}
 
+		// Return if not having an appropriate user role.
+		$roles = get_option( self::PLUGIN_PREFIX . '_condition_role' );
+		if ( 0 === count( array_intersect( wp_get_current_user()->roles, $roles ) ) ) {
+			return;
+		}
+
+		if ( get_option( self::PLUGIN_PREFIX . '_breakpoints_show' ) ) {
+			// Display breakpoint.
+			$breakpoints_definition = str_replace(
+				array( "\r\n", "\r", "\n" ),
+				"\n",
+				get_option( self::PLUGIN_PREFIX . '_breakpoints_definition' )
+			);
+			$breakpoints            = explode( "\n", $breakpoints_definition );
+			foreach ( $breakpoints as $breakpoint_key => $breakpoint_value ) {
+				$breakpoints[ $breakpoint_key ] = explode( ',', $breakpoint_value );
+			}
+
+			$wp_admin_bar->add_node(
+				array(
+					'id'     => self::PLUGIN_PREFIX,
+					'class'  => 'menupop',
+					'title'  => '<span class="ab-icon" aria-hidden="true"><span class="width">0</span></span>' .
+									'<span class="ab-label">' .
+										'<span class="width-wrap"><span class="width">0</span>px</span>' .
+										'<span class="breakpoint-wrap">(<span class="breakpoint"></span>)</span>' .
+									'</span>',
+					'parent' => '',
+					'href'   => '#',
+				)
+			);
+			$wp_admin_bar->add_node(
+				array(
+					'id'     => self::PLUGIN_PREFIX . '-breakpoint',
+					'title'  => '<span class="label">' . esc_html__( 'Breakpoint:', 'show-current-width' ) . '</span>' .
+									'<span class="breakpoint-wrap"><span class="breakpoint"></span></span>',
+					'parent' => self::PLUGIN_PREFIX,
+					'href'   => '#',
+				)
+			);
+			$breakpoint_index = 0;
+			foreach ( $breakpoints as $breakpoint ) {
 				$wp_admin_bar->add_node(
 					array(
-						'id'     => self::PLUGIN_PREFIX,
-						'class'  => 'menupop',
-						'title'  => '<span class="ab-icon" aria-hidden="true"><span class="width">0</span></span>' .
-										'<span class="ab-label">' .
-											'<span class="width-wrap"><span class="width">0</span>px</span>' .
-											'<span class="breakpoint-wrap">(<span class="breakpoint"></span>)</span>' .
-										'</span>',
-						'parent' => '',
-						'href'   => '#',
-					)
-				);
-				$wp_admin_bar->add_node(
-					array(
-						'id'     => self::PLUGIN_PREFIX . '-breakpoint',
-						'title'  => '<span class="label">' . esc_html__( 'Breakpoint:', 'show-current-width' ) . '</span>' .
-										'<span class="breakpoint-wrap"><span class="breakpoint"></span></span>',
+						'id'     => self::PLUGIN_PREFIX . '-breakpoint-' . $breakpoint_index,
+						'title'  =>
+							sprintf(
+								'<span class="icon"></span>' .
+								'<span class="name">%s:</span>' .
+								'<span class="range">%s &le; %s < %s</span>',
+								$breakpoint[3],
+								$breakpoint[0],
+								$breakpoint[2],
+								$breakpoint[1]
+							),
 						'parent' => self::PLUGIN_PREFIX,
 						'href'   => '#',
 					)
 				);
-				$breakpoint_index = 0;
-				foreach ( $breakpoints as $breakpoint ) {
-					$wp_admin_bar->add_node(
-						array(
-							'id'     => self::PLUGIN_PREFIX . '-breakpoint-' . $breakpoint_index,
-							'title'  =>
-								sprintf(
-									'<span class="icon"></span>' .
-									'<span class="name">%s:</span>' .
-									'<span class="range">%s &le; %s < %s</span>',
-									$breakpoint[3],
-									$breakpoint[0],
-									$breakpoint[2],
-									$breakpoint[1]
-								),
-							'parent' => self::PLUGIN_PREFIX,
-							'href'   => '#',
-						)
-					);
-					$breakpoint_index++;
-				}
-			} else {
-				// No display breakpoint.
-				$wp_admin_bar->add_node(
-					array(
-						'id'     => self::PLUGIN_PREFIX,
-						'class'  => 'menupop',
-						'title'  => '<span class="ab-icon" aria-hidden="true"><span class="width">0</span></span>' .
-										'<span class="ab-label">' .
-											'<span class="width-wrap"><span class="width">0</span>px</span>' .
-										'</span>',
-						'parent' => '',
-						'href'   => '#',
-					)
-				);
+				$breakpoint_index++;
 			}
+		} else {
+			// No display breakpoint.
+			$wp_admin_bar->add_node(
+				array(
+					'id'     => self::PLUGIN_PREFIX,
+					'class'  => 'menupop',
+					'title'  => '<span class="ab-icon" aria-hidden="true"><span class="width">0</span></span>' .
+									'<span class="ab-label">' .
+										'<span class="width-wrap"><span class="width">0</span>px</span>' .
+									'</span>',
+					'parent' => '',
+					'href'   => '#',
+				)
+			);
 		}
 	}
 }
