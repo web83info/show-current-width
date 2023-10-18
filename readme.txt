@@ -1,5 +1,6 @@
 === Show Current Width ===
 Contributors: web83info
+Donate link: https://www.buymeacoffee.com/web83info
 Tags: admin,width,developement,design
 Requires at least: 6.2
 Tested up to: 6.3.2
