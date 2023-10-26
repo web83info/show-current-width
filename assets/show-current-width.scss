@@ -38,26 +38,36 @@
 		#wp-admin-bar-show-current-width-breakpoint {
 			> .ab-item {
 				.label {
+					line-height: inherit;
+					display: inline-block;
 					margin-right: .25rem;
 					font-weight: bold;
 				}
 				.breakpoint-wrap {
+					line-height: inherit;
+					display: inline-block;
 					margin-left: .25rem;
 					font-weight: bold;
-					// .breakpoint {}
+					.breakpoint {
+						line-height: inherit;
+						display: inline-block;
+					}
 				}
 			}
 		}
 		[id ^= "wp-admin-bar-show-current-width-breakpoint-"] {
 			.icon {
+				line-height: inherit;
 				display: inline-block;
 				width: 1rem;
 			}
 			.name {
+				line-height: inherit;
 				display: inline-block;
 				width: 9rem;
 			}
 			.range {
+				line-height: inherit;
 				display: inline-block;
 				width: 9rem;
 			}
