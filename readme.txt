@@ -22,7 +22,7 @@ This plugin shows a current screen width on WP adminbar.
 
 = 1.2.3 - 2023-11-13 =
 * Add: Setting link  in adminbar.
-* Tested up to WordPress 6.4.1
+* Tested up to WordPress 6.4.1.
 
 = 1.2.2 - 2023-10-26 =
 * Fix: Adjust CSS for adminbar.
