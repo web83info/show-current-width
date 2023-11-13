@@ -264,5 +264,14 @@ class ShowCurrentWidth_Core {
 				)
 			);
 		}
+		$wp_admin_bar->add_node(
+			array(
+				'id'     => self::PLUGIN_PREFIX . '-link-setting',
+				'class'  => 'menupop',
+				'title'  => __( 'Open settings page', 'show-current-width' ),
+				'parent' => self::PLUGIN_PREFIX,
+				'href'   => admin_url( 'options-general.php?page=' . self::PLUGIN_PREFIX ),
+			)
+		);
 	}
 }
