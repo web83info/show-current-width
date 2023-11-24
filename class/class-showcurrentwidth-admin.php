@@ -20,7 +20,7 @@ class ShowCurrentWidth_Admin {
 	use Singleton;
 
 	/**
-	 * Plugin constant.
+	 * Constructor.
 	 *
 	 * @return void
 	 */

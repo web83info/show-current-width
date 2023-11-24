@@ -204,6 +204,9 @@ class ShowCurrentWidth_Core {
 			$breakpoints            = explode( "\n", $breakpoints_definition );
 			foreach ( $breakpoints as $breakpoint_key => $breakpoint_value ) {
 				$breakpoints[ $breakpoint_key ] = explode( ',', $breakpoint_value );
+				if ( count( $breakpoints[ $breakpoint_key ] ) < 4 ) {
+					unset( $breakpoints[ $breakpoint_key ] );
+				}
 			}
 
 			$wp_admin_bar->add_node(
