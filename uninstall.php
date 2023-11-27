@@ -11,33 +11,26 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 // Delete all options if option 'show-current-width_other_uninstall' is checked.
 if ( is_multisite() ) {
-	global $wpdb;
-	$blogid_current = get_current_blog_id();
-	$blogids        = $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" );
-	foreach ( $blogids as $blogid ) {
-		switch_to_blog( $blogid );
-		if ( '1' === get_option( 'show-current-width_other_uninstall' ) ) {
-			// Delete all options whose key begins with 'show-current-width_'.
-			delete_all_options( wp_load_alloptions( true ) );
-		}
+	$sites = get_sites();
+	foreach ( $sites as $site ) {
+		switch_to_blog( $site->blog_id );
+		delete_all_related_options();
+		restore_current_blog();
 	}
-	switch_to_blog( $blogid_current );
 } else {
-	if ( '1' === get_option( 'show-current-width_other_uninstall' ) ) {
-		// Delete all options whose key begins with 'show-current-width_'.
-		delete_all_options( wp_load_alloptions( true ) );
-	}
+	delete_all_related_options();
 }
 
 /**
  * Delete all options core.
- *
- * @param array $alloptions Load all options.
  */
-function delete_all_options( $alloptions ) {
-	foreach ( $alloptions as $option_key => $option_value ) {
-		if ( false !== strpos( $option_key, 'show-current-width_' ) ) {
-			delete_option( $option_key );
+function delete_all_related_options() {
+	$alloptions = wp_load_alloptions( true );
+	if ( '1' === get_option( 'show-current-width_other_uninstall' ) ) {
+		foreach ( $alloptions as $option_key => $option_value ) {
+			if ( false !== strpos( $option_key, 'show-current-width_' ) ) {
+				delete_option( $option_key );
+			}
 		}
 	}
 }
