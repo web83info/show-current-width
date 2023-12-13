@@ -22,7 +22,7 @@ class ShowCurrentWidth_Core {
 	/**
 	 * Plugin constant.
 	 */
-	const PLUGIN_VERSION           = '1.2.3';
+	const PLUGIN_VERSION           = '1.2.4';
 	const PLUGIN_PREFIX            = 'show-current-width';
 	const PLUGIN_PREFIX_DEPRECATED = 'w83-show-current-width';
 	const PLUGIN_GITHUB            = 'https://github.com/web83info/show-current-width';
@@ -40,6 +40,7 @@ class ShowCurrentWidth_Core {
 	const OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MIN = 0;
 	const OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MAX = 9999;
 	const OPTION_DEFAULT_ANIMATION_SHOW             = 1;
+	const OPTION_DEFAULT_ANIMATION_TIMEOUT          = 500;
 	const OPTION_DEFAULT_ADMIN_SHOW                 = 0;
 	const OPTION_DEFAULT_CONDITION_ROLE             = array( 'administrator' );
 	const OPTION_DEFAULT_OTHER_INIT                 = 0;
@@ -58,6 +59,7 @@ class ShowCurrentWidth_Core {
 		'breakpoints_limitwidth_min' => self::OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MIN,
 		'breakpoints_limitwidth_max' => self::OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MAX,
 		'animation_show'             => self::OPTION_DEFAULT_ANIMATION_SHOW,
+		'animation_timeout'          => self::OPTION_DEFAULT_ANIMATION_TIMEOUT,
 		'admin_show'                 => self::OPTION_DEFAULT_ADMIN_SHOW,
 		'condition_role'             => self::OPTION_DEFAULT_CONDITION_ROLE,
 		'other_init'                 => self::OPTION_DEFAULT_OTHER_INIT,
@@ -172,6 +174,7 @@ class ShowCurrentWidth_Core {
 			'breakpoints_definition' => get_option( self::PLUGIN_PREFIX . '_breakpoints_definition' ),
 			'breakpoints_show'       => get_option( self::PLUGIN_PREFIX . '_breakpoints_show' ),
 			'animation_show'         => get_option( self::PLUGIN_PREFIX . '_animation_show' ),
+			'animation_timeout'      => get_option( self::PLUGIN_PREFIX . '_animation_timeout' ),
 		);
 		wp_localize_script( self::PLUGIN_PREFIX . '-js', 'ShowCurrentWidthVariables', $pass_to_js );
 	}
@@ -204,6 +207,9 @@ class ShowCurrentWidth_Core {
 			$breakpoints            = explode( "\n", $breakpoints_definition );
 			foreach ( $breakpoints as $breakpoint_key => $breakpoint_value ) {
 				$breakpoints[ $breakpoint_key ] = explode( ',', $breakpoint_value );
+				if ( count( $breakpoints[ $breakpoint_key ] ) < 4 ) {
+					unset( $breakpoints[ $breakpoint_key ] );
+				}
 			}
 
 			$wp_admin_bar->add_node(

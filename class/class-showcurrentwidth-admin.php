@@ -20,7 +20,7 @@ class ShowCurrentWidth_Admin {
 	use Singleton;
 
 	/**
-	 * Plugin constant.
+	 * Constructor.
 	 *
 	 * @return void
 	 */
@@ -123,22 +123,11 @@ class ShowCurrentWidth_Admin {
 				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_breakpoints_limitwidth',
 			),
 		);
-		// Add field 1-4 (Animation on/off).
-		add_settings_field(
-			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
-			__( 'Animation', 'show-current-width' ),
-			array( $this, 'register_field_animation_show_html' ),
-			ShowCurrentWidth_Core::PLUGIN_PREFIX,
-			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section1',
-			array(
-				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
-			),
-		);
 
 		// Add section 2.
 		add_settings_section(
 			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
-			__( 'Display condition settings', 'show-current-width' ),
+			__( 'Display settings', 'show-current-width' ),
 			array( $this, 'register_section2_html' ),
 			ShowCurrentWidth_Core::PLUGIN_PREFIX
 		);
@@ -162,6 +151,28 @@ class ShowCurrentWidth_Admin {
 			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
 			array(
 				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_condition_role',
+			),
+		);
+		// Add field 2-3 (Animation on/off).
+		add_settings_field(
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
+			__( 'Animation', 'show-current-width' ),
+			array( $this, 'register_field_animation_show_html' ),
+			ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
+			array(
+				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
+			),
+		);
+		// Add field 2-4 (Animation timeout).
+		add_settings_field(
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_timeout',
+			__( 'Animation timeout', 'show-current-width' ),
+			array( $this, 'register_field_animation_timeout_html' ),
+			ShowCurrentWidth_Core::PLUGIN_PREFIX,
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-section2',
+			array(
+				'label_for' => ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_timeout',
 			),
 		);
 
@@ -286,35 +297,12 @@ class ShowCurrentWidth_Admin {
 	}
 
 	/**
-	 * Field 1-4 HTML.
-	 *
-	 * @return void
-	 */
-	public function register_field_animation_show_html() {
-		printf(
-			'<input type="hidden" name="%s_animation_show" value="0" />',
-			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX )
-		);
-		printf(
-			'<input type="checkbox" name="%s_animation_show" id="%s_animation_show" value="1" %s />',
-			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			checked( get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show' ), '1', false )
-		);
-		printf(
-			'<label for="%s_animation_show">%s</label>',
-			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
-			esc_html__( 'Enable count up animation', 'show-current-width' )
-		);
-	}
-
-	/**
 	 * Section 2 HTML.
 	 *
 	 * @return void
 	 */
 	public function register_section2_html() {
-		echo esc_html__( 'Setting about display condition', 'show-current-width' );
+		echo esc_html__( 'Setting about display', 'show-current-width' );
 	}
 
 	/**
@@ -368,6 +356,48 @@ class ShowCurrentWidth_Admin {
 			);
 			echo '</li>';
 		}
+	}
+
+	/**
+	 * Field 2-3 HTML.
+	 *
+	 * @return void
+	 */
+	public function register_field_animation_show_html() {
+		printf(
+			'<input type="hidden" name="%s_animation_show" value="0" />',
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX )
+		);
+		printf(
+			'<input type="checkbox" name="%s_animation_show" id="%s_animation_show" value="1" %s />',
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			checked( get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show' ), '1', false )
+		);
+		printf(
+			'<label for="%s_animation_show">%s</label>',
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_html__( 'Enable count up animation', 'show-current-width' )
+		);
+	}
+
+	/**
+	 * Field 2-4 HTML.
+	 *
+	 * @return void
+	 */
+	public function register_field_animation_timeout_html() {
+		printf(
+			'<label for="%s_animation_timeout">%s</label> ',
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_html__( 'Time to display the screen width after it is changed. (millisecond)', 'show-current-width' )
+		);
+		printf(
+			'<input type="text" name="%s_animation_timeout" id="%s_animation_timeout" class="small-text" value="%s" /> ms',
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( ShowCurrentWidth_Core::PLUGIN_PREFIX ),
+			esc_attr( get_option( ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_timeout' ) )
+		);
 	}
 
 	/**
@@ -459,11 +489,6 @@ class ShowCurrentWidth_Admin {
 		);
 		register_setting(
 			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
-			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
-			'esc_attr',
-		);
-		register_setting(
-			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
 			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_admin_show',
 			'esc_attr',
 		);
@@ -474,6 +499,16 @@ class ShowCurrentWidth_Admin {
 				'type'              => 'array',
 				'sanitize_callback' => array( $this, 'sanitize_array' ),
 			),
+		);
+		register_setting(
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_show',
+			'esc_attr',
+		);
+		register_setting(
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
+			ShowCurrentWidth_Core::PLUGIN_PREFIX . '_animation_timeout',
+			'esc_attr',
 		);
 		register_setting(
 			ShowCurrentWidth_Core::PLUGIN_PREFIX . '-field1',
