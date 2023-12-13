@@ -5,7 +5,7 @@ class ShowCurrentWidth {
 	constructor() {
 		this.timeoutWidth = undefined;
 		this.timeoutCountUp = undefined;
-		this.delay = 500;
+		this.delay = ShowCurrentWidthVariables.animation_timeout;
 		this.widthFrom = 0;
 		this.widthTo = window.innerWidth;
 		this.widthNow = 0;
