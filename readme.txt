@@ -3,9 +3,9 @@ Contributors: web83info
 Donate link: https://www.buymeacoffee.com/web83info
 Tags: admin,width,developement,design
 Requires at least: 6.2
-Tested up to: 6.4.1
+Tested up to: 6.4.2
 Requires PHP: 7.4
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,8 +20,12 @@ This plugin shows a current screen width on WP adminbar.
 
 == Changelog ==
 
+= 1.2.4 - 2023-12-13 =
+* Add: Animation timeout
+* Tested up to WordPress 6.4.2.
+
 = 1.2.3 - 2023-11-13 =
-* Add: Setting link  in adminbar.
+* Add: Setting link in adminbar.
 * Tested up to WordPress 6.4.1.
 
 = 1.2.2 - 2023-10-26 =
