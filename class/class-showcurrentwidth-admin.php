@@ -356,6 +356,7 @@ class ShowCurrentWidth_Admin {
 			);
 			echo '</li>';
 		}
+		echo '</ul>';
 	}
 
 	/**

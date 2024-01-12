@@ -10,8 +10,8 @@ class ShowCurrentWidth {
 		this.widthTo = window.innerWidth;
 		this.widthNow = 0;
 		this.countUpProceeding = false;
-		window.addEventListener('load', this.showWidth());
-		window.addEventListener('load', this.showWidthDelay());
+		window.addEventListener('load', () => { this.showWidth(); });
+		window.addEventListener('load', () => { this.showWidthDelay(); });
 	}
 
 	showWidth() {
