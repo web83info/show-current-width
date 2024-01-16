@@ -11,7 +11,7 @@
  * Plugin Name:         Show Current Width
  * Plugin URI:
  * Description:         This plugin shows a current screen width on WP adminbar.
- * Version:             1.2.5
+ * Version:             1.2.6
  * Requires at least:   6.0
  * Tested up to:        6.4.2
  * Requires PHP:        7.4
