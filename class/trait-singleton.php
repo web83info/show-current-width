@@ -1,6 +1,6 @@
 <?php
 /**
- * ShowCurrentWidth_Core
+ * Singleton
  *
  * @package None
  */
