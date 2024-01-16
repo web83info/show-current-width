@@ -22,7 +22,6 @@ This plugin shows a current screen width on WP adminbar.
 
 = 1.2.5 - 2023-12-28 =
 * Fix: JS error when no WP adminbar.
-* Tested up to WordPress 6.4.2.
 
 = 1.2.4 - 2023-12-13 =
 * Add: Animation timeout
