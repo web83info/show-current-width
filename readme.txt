@@ -83,7 +83,8 @@ This plugin shows a current screen width on WP adminbar.
 
 1. Apple iPhone XS Max.
 2. Apple iPad Pro (11 inch).
-3. Mac OS Safari.
+3. Mac OS Chrome.
+4. Plugin setting page.
 
 == Donation ==
 
