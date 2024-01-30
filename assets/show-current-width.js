@@ -16,7 +16,7 @@ class ShowCurrentWidth {
 
 	showWidth() {
 		this.widthTo = window.innerWidth;
-		if(document.getElementById('wpadminbar') == null) {
+		if(document.getElementById('wp-admin-bar-show-current-width') == null) {
 			return;
 		}
 		if(1 == ShowCurrentWidthVariables.animation_show) {
