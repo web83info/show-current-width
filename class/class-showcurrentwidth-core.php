@@ -126,7 +126,7 @@ class ShowCurrentWidth_Core {
 		// CSS.
 		wp_enqueue_style(
 			self::PLUGIN_PREFIX . '-css',
-			plugins_url( 'assets/show-current-width.min.css', dirname( __FILE__ ) ),
+			plugins_url( 'assets/show-current-width.min.css', __DIR__ ),
 			array(),
 			self::PLUGIN_VERSION
 		);
@@ -160,7 +160,7 @@ class ShowCurrentWidth_Core {
 		// JavaScript.
 		wp_enqueue_script(
 			self::PLUGIN_PREFIX . '-js',
-			plugins_url( 'assets/show-current-width.min.js', dirname( __FILE__ ) ),
+			plugins_url( 'assets/show-current-width.min.js', __DIR__ ),
 			array(),
 			self::PLUGIN_VERSION,
 			array(
@@ -252,7 +252,7 @@ class ShowCurrentWidth_Core {
 						'href'   => '#',
 					)
 				);
-				$breakpoint_index++;
+				++$breakpoint_index;
 			}
 		} else {
 			// No display breakpoint.

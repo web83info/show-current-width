@@ -555,5 +555,4 @@ class ShowCurrentWidth_Admin {
 		array_unshift( $actions, $link_setting, $link_github );
 		return $actions;
 	}
-
 }
