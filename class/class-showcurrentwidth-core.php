@@ -22,7 +22,7 @@ class ShowCurrentWidth_Core {
 	/**
 	 * Plugin constant.
 	 */
-	const PLUGIN_VERSION           = '1.2.7';
+	const PLUGIN_VERSION           = '1.2.8';
 	const PLUGIN_PREFIX            = 'show-current-width';
 	const PLUGIN_PREFIX_DEPRECATED = 'w83-show-current-width';
 	const PLUGIN_GITHUB            = 'https://github.com/web83info/show-current-width';
