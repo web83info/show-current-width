@@ -22,18 +22,18 @@ class ShowCurrentWidth_Core {
 	/**
 	 * Plugin constant.
 	 */
-	const PLUGIN_VERSION           = '1.2.8';
+	const PLUGIN_VERSION           = '1.2.9';
 	const PLUGIN_PREFIX            = 'show-current-width';
 	const PLUGIN_PREFIX_DEPRECATED = 'w83-show-current-width';
 	const PLUGIN_GITHUB            = 'https://github.com/web83info/show-current-width';
 
 	const OPTION_DEFAULT_BREAKPOINTS_DEFINITION     =
-		'0,576,xs,X-Small' . PHP_EOL .
+		'0,576,xs,Extra small' . PHP_EOL .
 		'576,768,sm,Small' . PHP_EOL .
 		'768,992,md,Medium' . PHP_EOL .
 		'992,1200,lg,Large' . PHP_EOL .
 		'1200,1400,xl,Extra large' . PHP_EOL .
-		'1400,9999,xll,Extra extra large';
+		'1400,9999,xxl,Extra extra large';
 	const OPTION_DEFAULT_BREAKPOINTS_SHOW           = 1;
 	const OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH     = 0;
 	const OPTION_DEFAULT_BREAKPOINTS_LIMITWIDTH_MIN = 0;
@@ -95,9 +95,6 @@ class ShowCurrentWidth_Core {
 			}
 		}
 
-		// Load textdomain.
-		add_action( 'admin_menu', array( $this, 'load_textdomain' ) );
-
 		// Load CSS and JS.
 		add_action( 'wp_enqueue_scripts', array( $this, 'load_css_js' ) );
 		if ( get_option( self::PLUGIN_PREFIX . '_admin_show' ) ) {
@@ -106,15 +103,6 @@ class ShowCurrentWidth_Core {
 
 		// Display width.
 		add_action( 'admin_bar_menu', array( $this, 'display_width' ), 999 );
-	}
-
-	/**
-	 * Load textdomain.
-	 *
-	 * @return void
-	 */
-	public function load_textdomain() {
-		load_plugin_textdomain( self::PLUGIN_PREFIX );
 	}
 
 	/**
