@@ -2,7 +2,7 @@
 /**
  * Singleton
  *
- * @package None
+ * @package Show_Current_Width
  */
 
 namespace ShowCurrentWidth;
@@ -15,9 +15,9 @@ trait Singleton {
 	/**
 	 * Instance.
 	 *
-	 * @var $instance
+	 * @var self|null
 	 */
-	private static $instance;
+	private static ?self $instance = null;
 
 	/**
 	 * Constructor.
@@ -27,11 +27,23 @@ trait Singleton {
 
 	/**
 	 * Get instance.
+	 *
+	 * @return static
 	 */
-	public static function get_instance() {
-		if ( empty( self::$instance ) ) {
-			self::$instance = new self();
+	public static function get_instance(): self {
+		if ( null === self::$instance ) {
+			self::$instance = new static();
 		}
 		return self::$instance;
 	}
+
+	/**
+	 * Prevent cloning.
+	 */
+	private function __clone() {}
+
+	/**
+	 * Prevent unserializing.
+	 */
+	private function __wakeup() {}
 }
