@@ -44,6 +44,10 @@ trait Singleton {
 
 	/**
 	 * Prevent unserializing.
+	 *
+	 * @throws \Exception If an attempt is made to unserialize the singleton.
 	 */
-	private function __wakeup() {}
+	public function __wakeup() {
+		throw new \Exception( 'Cannot unserialize a singleton.' );
+	}
 }
